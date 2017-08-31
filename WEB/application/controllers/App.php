@@ -33,6 +33,53 @@ class App extends CI_Controller
 		
     }
 	
+	
+	public function register(){
+		
+		$CI =& get_instance();
+        $user = $this->input->get_post('user', TRUE);
+        $pass = $this->input->get_post('pass', TRUE);
+		$pass2 = $this->input->get_post('pass2', TRUE);
+		$first = $this->input->get_post('first', TRUE);
+        $last = $this->input->get_post('last', TRUE);
+		$phone = $this->input->get_post('phone', TRUE);
+		$email = $this->input->get_post('email', TRUE);
+		if($pass!=$pass2){
+			$this->output->set_output(json_encode(array('success' => false,'result'=>'Пароли не совпадают')));
+			return;
+		}
+        $res = $CI->jservice->get(
+			array('Action' => 'Register', 
+			'user' => $user, 
+			'pass' => $pass, 
+			'first' => $first,
+			'last' => $last,
+			'phone' => $phone,
+			'email' => $email
+			)
+		);
+		
+		if($res!='OK'){
+			$this->output->set_output(json_encode(array('success' => false,'result'=>$res)));
+			return;
+		}
+		
+		$res = $CI->jservice->get(array('Action' => 'Login', 'Email' => $user, 'PasswordHash' => $pass ));
+        if (strlen($res) == 36 or strlen($res) == 38) {
+		    log_message('debug', 'Login sessionid= : ' . $res);
+            //$CI->session->set_userdata('SessionID', $res);
+			//session_start();
+			$_SESSION['SessionID'] = $res;
+			log_message('debug', 'php sessionid= : ' . session_id());
+			log_message('debug', 'sys sessionid= : ' . $_SESSION['SessionID']);
+            //$CI->jservice->get(array('Action' => 'SetRole', 'RoleName' => 'Администратор'));
+            $this->output->set_output(json_encode(array('success' => true)));
+        } else {
+            $this->output->set_output(json_encode(array('success' => false)));
+  
+      }
+	}
+	
 	/*
 	 public function setRole()
     {

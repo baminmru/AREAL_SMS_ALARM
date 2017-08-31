@@ -4,15 +4,12 @@
         fields: [
             {name: 'instanceid',type: 'string'}
             ,{name: 'id',type: 'string'}
+            ,{name:'arsms_data_smstime', type: 'string'}
             ,{name:'arsms_data_serialno', type: 'string'}
-            ,{name:'arsms_data_power_ok', type: 'string'}
-            ,{name:'arsms_data_controlcode', type: 'string'}
-            ,{name:'arsms_data_opercode', type: 'string'}
-            ,{name:'arsms_data_temperature', type: 'number'}
             ,{name:'arsms_data_roof_open', type: 'string'}
             ,{name:'arsms_data_pop_ok', type: 'string'}
-            ,{name:'arsms_data_smstime', type: 'string'}
-            ,{name:'arsms_data_phone', type: 'string'}
+            ,{name:'arsms_data_temperature', type: 'number'}
+            ,{name:'arsms_data_power_ok', type: 'string'}
         ]
     });
 

@@ -14,6 +14,9 @@
                 ,'serialno' =>   $this->input->get_post('serialno', TRUE)
                 ,'makedate' =>   $this->input->get_post('makedate', TRUE)
                 ,'phone' =>   $this->input->get_post('phone', TRUE)
+                ,'roof_no' =>   $this->input->get_post('roof_no', TRUE)
+                ,'pop_no' =>   $this->input->get_post('pop_no', TRUE)
+                ,'power_no' =>   $this->input->get_post('power_no', TRUE)
             );
             $armd_info = $this->m_armd_info->setRow($data);
             print json_encode($armd_info);
@@ -27,6 +30,9 @@
                 ,'serialno' =>   $this->input->get_post('serialno', TRUE)
                 ,'makedate' =>   $this->input->get_post('makedate', TRUE)
                 ,'phone' =>   $this->input->get_post('phone', TRUE)
+                ,'roof_no' =>   $this->input->get_post('roof_no', TRUE)
+                ,'pop_no' =>   $this->input->get_post('pop_no', TRUE)
+                ,'power_no' =>   $this->input->get_post('power_no', TRUE)
             );
                 $instanceid =  $this->input->get_post('instanceid', TRUE);
             $armd_info= $this->m_armd_info->newRow($instanceid,$data);

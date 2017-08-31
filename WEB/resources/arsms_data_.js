@@ -136,13 +136,7 @@ showGroupsText:  'Показать группировку'
         columns: [
 {text: "Дата и Время СМС", width:110, dataIndex: 'smstime', sortable: true, xtype: 'datecolumn',    renderer:myDateRenderer}
             ,
-{text: "Телефон отправителя", width: 200, dataIndex: 'phone', sortable: true}
-            ,
 {text: "Серийный номер", width: 200, dataIndex: 'serialno', sortable: true}
-            ,
-{text: "Код оператора", width: 200, dataIndex: 'opercode', sortable: true}
-            ,
-{text: "Контрольный код", width: 200, dataIndex: 'controlcode', sortable: true}
             ,
 {text: "Температура", width:60, dataIndex: 'temperature', sortable: true}
             ,
@@ -227,21 +221,9 @@ allowBlank:true
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
-        x: 5, 
-        y: 55, 
-
-xtype:  'textfield',
-value:  '',
+xtype:  'hidden',
 name:   'phone',
-itemId:   'phone',
-fieldLabel:  'Телефон отправителя',
-editable: false,
-readOnly: true,
-allowBlank:true
-       ,labelWidth: 120
+fieldLabel:  'Телефон отправителя'
 }
 ,
 {
@@ -249,7 +231,7 @@ allowBlank:true
         width: 740,
         maxWidth: 740,
         x: 5, 
-        y: 110, 
+        y: 55, 
 
 xtype:  'textfield',
 value:  '',
@@ -263,39 +245,15 @@ allowBlank:true
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
-        x: 5, 
-        y: 165, 
-
-xtype:  'textfield',
-value:  '',
+xtype:  'hidden',
 name:   'opercode',
-itemId:   'opercode',
-fieldLabel:  'Код оператора',
-editable: false,
-readOnly: true,
-allowBlank:true
-       ,labelWidth: 120
+fieldLabel:  'Код оператора'
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
-        x: 5, 
-        y: 220, 
-
-xtype:  'textfield',
-value:  '',
+xtype:  'hidden',
 name:   'controlcode',
-itemId:   'controlcode',
-fieldLabel:  'Контрольный код',
-editable: false,
-readOnly: true,
-allowBlank:true
-       ,labelWidth: 120
+fieldLabel:  'Контрольный код'
 }
 ,
 {
@@ -303,7 +261,7 @@ allowBlank:true
         width: 740,
         maxWidth: 740,
         x: 5, 
-        y: 275, 
+        y: 110, 
 
 xtype:  'numberfield',
 editable: false,
@@ -318,7 +276,7 @@ allowBlank:true
        ,labelWidth: 120
 }
        ], width: 770,
-       height: 350 
+       height: 185 
         }
 ,
         { 
@@ -512,13 +470,13 @@ allowBlank:true
 
 Ext.define('EditWindow_arsms_data', {
     extend:  'Ext.window.Window',
-    maxHeight: 735,
+    maxHeight: 570,
     maxWidth: 900,
     autoScroll:true,
     minWidth: 750,
     width: 800,
-    minHeight:670,
-    height:670,
+    minHeight:520,
+    height:530,
     constrainHeader :true,
     layout:  'absolute',
     autoShow: true,

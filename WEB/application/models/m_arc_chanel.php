@@ -53,14 +53,14 @@ class  M_arc_chanel extends CI_Model {
 	    if (count($res)) {
 	        return $res;
 	    } else {
-	        return null;
+	        return array();
 	    }
 		}
     function getRowsByInstance($id,$sort=array())
 		{
 	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid', 'ViewName' => 'arc_chanel', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
-	    return null;
+	    return array();
 	} else {
 	    return $res;
 	}
@@ -69,7 +69,7 @@ class  M_arc_chanel extends CI_Model {
 	{
 	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid', 'ViewName' => 'arc_chanel', 'WhereClause' => ' parentstructrowid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
-	    return null;
+	    return array();
 	} else {
 	    return $res;
 	}

@@ -31,6 +31,7 @@ var p1_valid=false;
                     ,phone: active.get('phone') 
                     ,email: active.get('email') 
                     ,login: active.get('login') 
+                    ,isadmin: active.get('isadmin') 
                 }
                 , success: function(response){
                 var text = response.responseText;
@@ -217,6 +218,12 @@ editable: false,
 readOnly: true,
 allowBlank:true
 }
+,
+{
+xtype:  'hidden',
+name:   'isadmin',
+fieldLabel:  'Администратор'
+}
        ],
        height: 130 
         }
@@ -360,6 +367,12 @@ readOnly: true,
 allowBlank:true
        ,labelWidth: 120
 }
+,
+{
+xtype:  'hidden',
+name:   'isadmin',
+fieldLabel:  'Администратор'
+}
        ], width: 770,
        height: 130 
         }
@@ -416,6 +429,7 @@ allowBlank:true
                     ,phone: active.get('phone') 
                     ,email: active.get('email') 
                     ,login: active.get('login') 
+                    ,isadmin: active.get('isadmin') 
                 }
                 , success: function(response){
                 var text = response.responseText;

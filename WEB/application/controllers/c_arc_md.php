@@ -4,6 +4,20 @@
          parent::__construct();
         $this->_loadModels();
     }
+	function VCall(){
+		log_message('debug', 'arc_md.VCall post : '.json_encode($this->input->post(NULL, FALSE)));
+        $tempId  =  $this->input->get_post('arc_mdid', TRUE);
+        if (strlen($tempId) > 0) {
+            $return = $this->m_arc_md->VCall($tempId);
+        }
+        else {
+            $return = array(
+                'success' => FALSE,
+                'msg'     => 'No  ID to VCall'
+            );
+        }
+        print json_encode($return);
+	}
     function setRow() {
           log_message('debug', 'arc_md.setRow post : '.json_encode($this->input->post(NULL, FALSE)));
           log_message('debug', 'arc_md.getRows get : '.json_encode($this->input->get(NULL, FALSE)));
@@ -11,10 +25,14 @@
                 'arc_mdid' =>  $this->input->get_post('arc_mdid', TRUE)
                 ,'instanceid' =>  $this->input->get_post('instanceid', TRUE)
                 ,'mymodule' =>   $this->input->get_post('mymodule', TRUE)
+                ,'moduleserial' =>   $this->input->get_post('moduleserial', TRUE)
                 ,'name' =>   $this->input->get_post('name', TRUE)
                 ,'deivetype' =>   $this->input->get_post('deivetype', TRUE)
                 ,'theaddress' =>   $this->input->get_post('theaddress', TRUE)
                 ,'master_fio' =>   $this->input->get_post('master_fio', TRUE)
+                ,'roof_no' =>   $this->input->get_post('roof_no', TRUE)
+                ,'pop_no' =>   $this->input->get_post('pop_no', TRUE)
+                ,'power_no' =>   $this->input->get_post('power_no', TRUE)
             );
             $arc_md = $this->m_arc_md->setRow($data);
             print json_encode($arc_md);
@@ -25,10 +43,14 @@
                 'arc_mdid' =>  $this->input->get_post('arc_mdid', TRUE)
                 ,'instanceid' =>  $this->input->get_post('instanceid', TRUE)
                 ,'mymodule' =>   $this->input->get_post('mymodule', TRUE)
+                ,'moduleserial' =>   $this->input->get_post('moduleserial', TRUE)
                 ,'name' =>   $this->input->get_post('name', TRUE)
                 ,'deivetype' =>   $this->input->get_post('deivetype', TRUE)
                 ,'theaddress' =>   $this->input->get_post('theaddress', TRUE)
                 ,'master_fio' =>   $this->input->get_post('master_fio', TRUE)
+                ,'roof_no' =>   $this->input->get_post('roof_no', TRUE)
+                ,'pop_no' =>   $this->input->get_post('pop_no', TRUE)
+                ,'power_no' =>   $this->input->get_post('power_no', TRUE)
             );
                 $instanceid =  $this->input->get_post('instanceid', TRUE);
             $arc_md= $this->m_arc_md->newRow($instanceid,$data);
@@ -54,7 +76,7 @@
            if(!$sort || $group == $sort) 
             {
             	$sort = json_decode($sort);
-            	$sort[] = array('property'=>'mymodule', 'direction'=>'ASC');
+            	$sort[] = array('property'=>'moduleserial', 'direction'=>'ASC');
             	$sort = json_encode($sort);
             }
             $instanceid=$this->input->get('instanceid', FALSE);
@@ -81,7 +103,7 @@
            if(!$sort || $group == $sort) 
             {
             	$sort = json_decode($sort);
-            	$sort[] = array('property'=>'mymodule', 'direction'=>'ASC');
+            	$sort[] = array('property'=>'moduleserial', 'direction'=>'ASC');
             	$sort = json_encode($sort);
             }
         $InstId  =  $this->input->get_post('instanceid', TRUE);
@@ -108,7 +130,7 @@
            if(!$sort || $group == $sort) 
             {
             	$sort = json_decode($sort);
-            	$sort[] = array('property'=>'mymodule', 'direction'=>'ASC');
+            	$sort[] = array('property'=>'moduleserial', 'direction'=>'ASC');
             	$sort = json_encode($sort);
             }
         $ParentId  =  $this->input->get_post('parentid', TRUE);

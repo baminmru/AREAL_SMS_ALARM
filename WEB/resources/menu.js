@@ -18,6 +18,25 @@ var actionarc = Ext.create('Ext.Action', {
 			}
              }
 });
+var actionarlog = Ext.create('Ext.Action', {
+    itemId:             'actionarlog',
+    text:               'Протокол отсылки оповещений',
+    iconCls:            'icon-brick',
+			 disabled:defaultMenuDisabled,
+			 hidden:defaultMenuHidden,
+             handler: function(){
+			var j=Ext.getCmp('arlog_jrnl');
+			if(j==null){
+				j=arlog_Jrnl();
+				j.iconCls='icon-brick';
+				contentPanel.add(j);
+				contentPanel.setActiveTab(j);
+			}
+			else{
+				contentPanel.setActiveTab(j);
+			}
+             }
+});
 var actionarmd = Ext.create('Ext.Action', {
     itemId:             'actionarmd',
     text:               'Справочник',
@@ -56,6 +75,25 @@ var actionarsms = Ext.create('Ext.Action', {
 			}
              }
 });
+var actionarlog = Ext.create('Ext.Action', {
+        itemId:  'actionarlog',
+        text:   'Протокол отсылки оповещений',
+        iconCls:  'icon-brick',
+			 disabled:defaultMenuDisabled,
+			 hidden:defaultMenuHidden,
+			handler: function(){
+			var j=Ext.getCmp('arlog');
+			if(j==null){
+				j=eval('arlog_Panel_'+OTEditMode('arlog')+'(\'{416B7212-B9EF-4173-9A38-E215B75A2103}\', true)');
+        j.iconCls=  'icon-brick';
+				contentPanel.add(j);
+				contentPanel.setActiveTab(j);
+			}
+			else{
+				contentPanel.setActiveTab(j);
+			}
+        }
+    });
 var actionarmd = Ext.create('Ext.Action', {
         itemId:  'actionarmd',
         text:   'Справочник',
@@ -141,7 +179,7 @@ var actionMTZSystem = Ext.create('Ext.Action', {
 			handler: function(){
 			var j=Ext.getCmp('mtzsystem');
 			if(j==null){
-				j=eval('MTZSystem_Panel_'+OTEditMode('MTZSystem')+'(\'{C5A874A1-1D01-43F5-AA2B-5431031FD45C}\', true)');
+				j=eval('MTZSystem_Panel_'+OTEditMode('MTZSystem')+'(\'{74BDBFEF-BFEF-EFBD-BFBD-011DEFBFBD43}\', true)');
         j.iconCls=  'icon-brick';
 				contentPanel.add(j);
 				contentPanel.setActiveTab(j);
@@ -160,7 +198,7 @@ var actionMTZUsers = Ext.create('Ext.Action', {
 			handler: function(){
 			var j=Ext.getCmp('mtzusers');
 			if(j==null){
-				j=eval('MTZUsers_Panel_'+OTEditMode('MTZUsers')+'(\'{E0FB5E85-050E-4322-8505-9E0CA132E901}\', true)');
+				j=eval('MTZUsers_Panel_'+OTEditMode('MTZUsers')+'(\'{5EBDBFEF-BFEF-EFBD-BFBD-0E052243EFBF}\', true)');
         j.iconCls=  'icon-brick';
 				contentPanel.add(j);
 				contentPanel.setActiveTab(j);

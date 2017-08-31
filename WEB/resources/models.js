@@ -9,6 +9,8 @@
             ,{name: 'brief',type: 'string'}
             ,{name:'login', type: 'string'}
             ,{name:'org', type: 'string'}
+            ,{name:'isadmin', type: 'int'}
+            ,{name:'isadmin_grid', type: 'string'}
             ,{name:'name', type: 'string'}
             ,{name:'family', type: 'string'}
             ,{name:'email', type: 'string'}
@@ -24,8 +26,15 @@
             ,{name: 'id',type: 'string'}
             ,{name: 'instanceid',type: 'string'}
             ,{name: 'brief',type: 'string'}
+            ,{name:'moduleserial', type: 'string'}
+            ,{name:'power_no', type: 'int'}
+            ,{name:'power_no_grid', type: 'string'}
             ,{name:'master_fio', type: 'string'}
+            ,{name:'pop_no', type: 'int'}
+            ,{name:'pop_no_grid', type: 'string'}
             ,{name:'name', type: 'string'}
+            ,{name:'roof_no', type: 'int'}
+            ,{name:'roof_no_grid', type: 'string'}
             ,{name:'mymodule', type: 'string'}
             ,{name:'mymodule_grid', type: 'string'}
             ,{name:'deivetype', type: 'string'}
@@ -50,6 +59,52 @@
             ,{name:'ch_taype_grid', type: 'string'}
             ,{name:'ch_on', type: 'int'}
             ,{name:'ch_on_grid', type: 'string'}
+        ]
+    });
+
+ Ext.define('cmbmodel_arc_chanel',{
+            extend:'Ext.data.Model',
+        fields: [
+            {name: 'arc_chanelid',type: 'string'}
+            ,{name: 'brief',type: 'string'}
+        ]
+    });
+    var cmbstore_arc_chanel_loaded=false;
+    var cmbstore_arc_chanel = Ext.create('Ext.data.Store', {
+        model:'cmbmodel_arc_chanel',
+        autoLoad: false,
+        autoSync: false,
+        proxy: {
+            type:   'ajax',
+                url:   rootURL+'index.php/c_arc_chanel/getRows',
+            reader: {
+                type:   'json'
+                ,rootProperty:  'data'
+                ,successProperty:  'success'
+                ,messageProperty:  'msg'
+            }
+        },
+       listeners: {
+       'load': function(){combo_arc_chanel_loaded =true;}
+       }
+    });
+
+ Ext.define('model_arlog_data',{
+            extend:'Ext.data.Model',
+        fields: [
+            {name: 'arlog_dataid',type: 'string'}
+            ,{name: 'id',type: 'string'}
+            ,{name: 'instanceid',type: 'string'}
+            ,{name: 'brief',type: 'string'}
+            ,{name:'sendresult', type: 'string'}
+            ,{name:'chanel', type: 'string'}
+            ,{name:'chanel_grid', type: 'string'}
+            ,{name:'sms', type: 'string'}
+            ,{name:'sms_grid', type: 'string'}
+            ,{name:'finished', type: 'int'}
+            ,{name:'finished_grid', type: 'string'}
+            ,{name:'trynumber', type: 'number'}
+            ,{name:'sendtime', type: 'date',dateFormat:'Y-m-d H:i:s'}
         ]
     });
 
@@ -138,9 +193,15 @@
             ,{name: 'instanceid',type: 'string'}
             ,{name: 'brief',type: 'string'}
             ,{name:'serialno', type: 'string'}
+            ,{name:'power_no', type: 'int'}
+            ,{name:'power_no_grid', type: 'string'}
             ,{name:'moduletype', type: 'string'}
             ,{name:'moduletype_grid', type: 'string'}
+            ,{name:'pop_no', type: 'int'}
+            ,{name:'pop_no_grid', type: 'string'}
             ,{name:'phone', type: 'string'}
+            ,{name:'roof_no', type: 'int'}
+            ,{name:'roof_no_grid', type: 'string'}
             ,{name:'makedate', type: 'date',dateFormat:'Y-m-d'}
         ]
     });
@@ -194,6 +255,32 @@
         ]
     });
 
+ Ext.define('cmbmodel_arsms_data',{
+            extend:'Ext.data.Model',
+        fields: [
+            {name: 'arsms_dataid',type: 'string'}
+            ,{name: 'brief',type: 'string'}
+        ]
+    });
+    var cmbstore_arsms_data_loaded=false;
+    var cmbstore_arsms_data = Ext.create('Ext.data.Store', {
+        model:'cmbmodel_arsms_data',
+        autoLoad: false,
+        autoSync: false,
+        proxy: {
+            type:   'ajax',
+                url:   rootURL+'index.php/c_arsms_data/getRows',
+            reader: {
+                type:   'json'
+                ,rootProperty:  'data'
+                ,successProperty:  'success'
+                ,messageProperty:  'msg'
+            }
+        },
+       listeners: {
+       'load': function(){combo_arsms_data_loaded =true;}
+       }
+    });
 
  Ext.define('model_bpc_info',{
             extend:'Ext.data.Model',

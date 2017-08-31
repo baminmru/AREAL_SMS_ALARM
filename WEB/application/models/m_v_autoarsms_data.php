@@ -30,20 +30,17 @@ class  M_v_autoarsms_data extends CI_Model {
 			    //case 'value':
 			    	//$cond = '';
 			    	//break;
-			  case 'clientid':
-			  $cond = "getclientsms('".$obj->value."',id)=1";	
-			  break;			  
-			  case 'arsms_data_temperature_le':
-			  $cond = 'arsms_data_temperature<='.$obj->value;
-			  break;
-			  case 'arsms_data_temperature_ge':
-			  $cond = 'arsms_data_temperature>='.$obj->value;
-			  break;
 			  case 'arsms_data_smstime_le':
 			  $cond = 'arsms_data_smstime<="'.$obj->value.'"';
 			  break;
 			  case 'arsms_data_smstime_ge':
 			  $cond = 'arsms_data_smstime>="'.$obj->value.'"';
+			  break;
+			  case 'arsms_data_temperature_le':
+			  $cond = 'arsms_data_temperature<='.$obj->value;
+			  break;
+			  case 'arsms_data_temperature_ge':
+			  $cond = 'arsms_data_temperature>='.$obj->value;
 			  break;
 		    	default:
 			    	if(isset($obj->value))
@@ -66,12 +63,12 @@ class  M_v_autoarsms_data extends CI_Model {
 	    log_message('error','Exception: '. $e->getMessage());
     }
 	 if (isset($offset) && isset($limit)) {
-	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarsms_data','FieldList'=>'instanceid,id,arsms_data_serialno,arsms_data_power_ok,arsms_data_controlcode,arsms_data_opercode,arsms_data_temperature,arsms_data_roof_open,arsms_data_pop_ok,DATE_FORMAT(arsms_data_smstime,\'%Y-%m-%d %H:%i:%s\') arsms_data_smstime,arsms_data_phone','Sort'=>$sort, 'WhereClause' => $whereclause,'Limit'=>$limit,'Offset'=>$offset));
+	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarsms_data','FieldList'=>'instanceid,id,DATE_FORMAT(arsms_data_smstime,\'%Y-%m-%d %H:%i:%s\') arsms_data_smstime,arsms_data_serialno,arsms_data_roof_open,arsms_data_pop_ok,arsms_data_temperature,arsms_data_power_ok','Sort'=>$sort, 'WhereClause' => $whereclause,'Limit'=>$limit,'Offset'=>$offset));
 	} else {
-	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarsms_data','FieldList'=>'instanceid,id,arsms_data_serialno,arsms_data_power_ok,arsms_data_controlcode,arsms_data_opercode,arsms_data_temperature,arsms_data_roof_open,arsms_data_pop_ok,DATE_FORMAT(arsms_data_smstime,\'%Y-%m-%d %H:%i:%s\') arsms_data_smstime,arsms_data_phone','Sort'=>$sort, 'WhereClause' => $whereclause));
+	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarsms_data','FieldList'=>'instanceid,id,DATE_FORMAT(arsms_data_smstime,\'%Y-%m-%d %H:%i:%s\') arsms_data_smstime,arsms_data_serialno,arsms_data_roof_open,arsms_data_pop_ok,arsms_data_temperature,arsms_data_power_ok','Sort'=>$sort, 'WhereClause' => $whereclause));
 	}
 	$root = new stdClass();
-	$root->total = $this->jservice->get(array('Action' => 'CountView', 'ViewName' => 'v_autoarsms_data','FieldList'=>'instanceid,id,arsms_data_serialno,arsms_data_power_ok,arsms_data_controlcode,arsms_data_opercode,arsms_data_temperature,arsms_data_roof_open,arsms_data_pop_ok,DATE_FORMAT(arsms_data_smstime,\'%Y-%m-%d %H:%i:%s\') arsms_data_smstime,arsms_data_phone', 'WhereClause' => $whereclause));
+	$root->total = $this->jservice->get(array('Action' => 'CountView', 'ViewName' => 'v_autoarsms_data','FieldList'=>'instanceid,id,DATE_FORMAT(arsms_data_smstime,\'%Y-%m-%d %H:%i:%s\') arsms_data_smstime,arsms_data_serialno,arsms_data_roof_open,arsms_data_pop_ok,arsms_data_temperature,arsms_data_power_ok', 'WhereClause' => $whereclause));
 	$root->success = true;
 	$root->rows = $res;
 	return $root;

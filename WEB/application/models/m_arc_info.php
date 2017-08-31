@@ -4,7 +4,7 @@ class  M_arc_info extends CI_Model {
     function getRow($empId) {
     $result = array('success' => false, 'msg' => 'No Row ID for retrive data');
 	if (!empty($empId)){
-	    $res = $this->jservice->get(array('Action' => 'GetRowData','FieldList'=>'B2G(arc_infoid) as arc_infoid, B2G(arc_infoid) as id,B2G(instanceid) as instanceid, arc_info_BRIEF_F(arc_infoid , NULL) as  brief,family,name,org,phone,email,login', 'PartName' => 'arc_info', 'ID' =>  $empId 	));
+	    $res = $this->jservice->get(array('Action' => 'GetRowData','FieldList'=>'B2G(arc_infoid) as arc_infoid, B2G(arc_infoid) as id,B2G(instanceid) as instanceid, arc_info_BRIEF_F(arc_infoid , NULL) as  brief,family,name,org,phone,email,login,isadmin, case isadmin  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as isadmin_grid', 'PartName' => 'arc_info', 'ID' =>  $empId 	));
 	    if (!empty($res)) {
 	        $result = $res[0];
 	    }
@@ -49,18 +49,18 @@ class  M_arc_info extends CI_Model {
     }
     function getRows($sort=array())
 		{
-	    $res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_infoid) as arc_infoid, B2G(arc_infoid) as id,B2G(instanceid) as instanceid, arc_info_BRIEF_F(arc_infoid , NULL) as  brief,family,name,org,phone,email,login', 'ViewName' => 'arc_info'));
+	    $res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_infoid) as arc_infoid, B2G(arc_infoid) as id,B2G(instanceid) as instanceid, arc_info_BRIEF_F(arc_infoid , NULL) as  brief,family,name,org,phone,email,login,isadmin, case isadmin  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as isadmin_grid', 'ViewName' => 'arc_info'));
 	    if (count($res)) {
 	        return $res;
 	    } else {
-	        return null;
+	        return array();
 	    }
 		}
     function getRowsByInstance($id,$sort=array())
 		{
-	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_infoid) as arc_infoid, B2G(arc_infoid) as id,B2G(instanceid) as instanceid, arc_info_BRIEF_F(arc_infoid , NULL) as  brief,family,name,org,phone,email,login', 'ViewName' => 'arc_info', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
+	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_infoid) as arc_infoid, B2G(arc_infoid) as id,B2G(instanceid) as instanceid, arc_info_BRIEF_F(arc_infoid , NULL) as  brief,family,name,org,phone,email,login,isadmin, case isadmin  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as isadmin_grid', 'ViewName' => 'arc_info', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
-	    return null;
+	    return array();
 	} else {
 	    return $res;
 	}

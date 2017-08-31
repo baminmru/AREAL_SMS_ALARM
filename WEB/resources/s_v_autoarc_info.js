@@ -4,11 +4,11 @@
         fields: [
             {name: 'instanceid',type: 'string'}
             ,{name: 'id',type: 'string'}
-            ,{name:'arc_info_phone', type: 'string'}
             ,{name:'arc_info_org', type: 'string'}
-            ,{name:'arc_info_name', type: 'string'}
-            ,{name:'arc_info_family', type: 'string'}
             ,{name:'arc_info_login', type: 'string'}
+            ,{name:'arc_info_family', type: 'string'}
+            ,{name:'arc_info_phone', type: 'string'}
+            ,{name:'arc_info_name', type: 'string'}
             ,{name:'arc_info_email', type: 'string'}
         ]
     });

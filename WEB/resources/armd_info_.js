@@ -138,6 +138,12 @@ showGroupsText:  'Показать группировку'
 {text: "Дата изготовления", width:90, dataIndex: 'makedate', sortable: true, xtype: 'datecolumn',   renderer:myDateOnlyRenderer }
             ,
 {text: "Номер телефона", width: 200, dataIndex: 'phone', sortable: true}
+            ,
+{text: "Крышка NO", width:80, dataIndex: 'roof_no_grid', sortable: true}
+            ,
+{text: "Поплавок NO", width:80, dataIndex: 'pop_no_grid', sortable: true}
+            ,
+{text: "Питание NO", width:80, dataIndex: 'power_no_grid', sortable: true}
         ]
        ,
     listeners: {
@@ -177,6 +183,7 @@ initComponent: function(){
     Ext.apply(this,{
         activeRecord: null,
         defaultType:  'textfield',
+        id:'armd_info',
         x: 0, 
         fieldDefaults: {
          labelAlign:  'top' //,
@@ -279,6 +286,134 @@ allowBlank:false
        ], width: 770,
        height: 240 
         }
+,
+        { 
+        xtype:'panel', 
+        id:'armd_info-1',
+        title:      'Конфигурация датчиков',
+        defaultType:  'textfield',
+        closable:false,
+        collapsible:true,
+        titleCollapse : true,
+        layout:'absolute', 
+        x: 0, 
+            items: [
+{
+        minWidth: 740,
+        width: 740,
+        maxWidth: 740,
+        x: 5, 
+        y: 0, 
+
+xtype:          'combobox',
+editable: false,
+trigger1Cls:        'x-form-clear-trigger', 
+trigger2Cls:        'x-form-select-trigger', 
+hideTrigger1:false, 
+hideTrigger2:false, 
+onTrigger1Click : function(){
+		this.collapse();
+		this.clearValue();
+},
+onTrigger2Click : function(){ 
+		if(this.isExpanded) {
+			this.collapse(); 
+		}else{ 
+			this.expand();
+		}
+},
+store: enum_Boolean,
+valueField:     'name',
+displayField:   'name',
+//typeAhead: true,
+queryMode:      'local',
+emptyText:      '',
+name:   'roof_no_grid',
+itemId:   'roof_no_grid',
+listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('roof_no', record.get('value'));}  },
+fieldLabel:  'Крышка NO',
+allowBlank:true
+       ,labelWidth: 120
+}
+,
+{
+        minWidth: 740,
+        width: 740,
+        maxWidth: 740,
+        x: 5, 
+        y: 55, 
+
+xtype:          'combobox',
+editable: false,
+trigger1Cls:        'x-form-clear-trigger', 
+trigger2Cls:        'x-form-select-trigger', 
+hideTrigger1:false, 
+hideTrigger2:false, 
+onTrigger1Click : function(){
+		this.collapse();
+		this.clearValue();
+},
+onTrigger2Click : function(){ 
+		if(this.isExpanded) {
+			this.collapse(); 
+		}else{ 
+			this.expand();
+		}
+},
+store: enum_Boolean,
+valueField:     'name',
+displayField:   'name',
+//typeAhead: true,
+queryMode:      'local',
+emptyText:      '',
+name:   'pop_no_grid',
+itemId:   'pop_no_grid',
+listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('pop_no', record.get('value'));}  },
+fieldLabel:  'Поплавок NO',
+allowBlank:true
+       ,labelWidth: 120
+}
+,
+{
+        minWidth: 740,
+        width: 740,
+        maxWidth: 740,
+        x: 5, 
+        y: 110, 
+
+xtype:          'combobox',
+editable: false,
+trigger1Cls:        'x-form-clear-trigger', 
+trigger2Cls:        'x-form-select-trigger', 
+hideTrigger1:false, 
+hideTrigger2:false, 
+onTrigger1Click : function(){
+		this.collapse();
+		this.clearValue();
+},
+onTrigger2Click : function(){ 
+		if(this.isExpanded) {
+			this.collapse(); 
+		}else{ 
+			this.expand();
+		}
+},
+store: enum_Boolean,
+valueField:     'name',
+displayField:   'name',
+//typeAhead: true,
+queryMode:      'local',
+emptyText:      '',
+name:   'power_no_grid',
+itemId:   'power_no_grid',
+listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('power_no', record.get('value'));}  },
+fieldLabel:  'Питание NO',
+allowBlank:true
+       ,labelWidth: 120
+}
+       ], width: 760,
+       height: 235 
+        } //group
           ],//items = part panel
         instanceid:'',
         dockedItems: [{
@@ -336,6 +471,9 @@ allowBlank:false
                     ,serialno: active.get('serialno') 
                     ,makedate:function() { if(active.get('makedate')) return active.get('makedate').toLocaleFormat('%Y-%m-%d %H:%M:%S'); else return null;}()
                     ,phone: active.get('phone') 
+                    ,roof_no: active.get('roof_no') 
+                    ,pop_no: active.get('pop_no') 
+                    ,power_no: active.get('power_no') 
                 }
                 , success: function(response){
                 var text = response.responseText;
@@ -377,13 +515,13 @@ allowBlank:false
 
 Ext.define('EditWindow_armd_info', {
     extend:  'Ext.window.Window',
-    maxHeight: 380,
+    maxHeight: 625,
     maxWidth: 900,
     autoScroll:true,
     minWidth: 750,
     width: 800,
-    minHeight:330,
-    height:340,
+    minHeight:575,
+    height:585,
     constrainHeader :true,
     layout:  'absolute',
     autoShow: true,

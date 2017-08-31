@@ -98,7 +98,7 @@
 		
 		<script type="text/javascript" src="resources/models.js"></script>
 		<script type="text/javascript" src="resources/enums.js"></script>
-			<?php require('inc.php'); ?>
+		<?php require('inc.php'); ?>
 		<script type="text/javascript" src="resources/menu.js"></script>
 		
 		<div id="loading-mask"></div>

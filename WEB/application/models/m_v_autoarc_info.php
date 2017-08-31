@@ -51,12 +51,12 @@ class  M_v_autoarc_info extends CI_Model {
 	    log_message('error','Exception: '. $e->getMessage());
     }
 	 if (isset($offset) && isset($limit)) {
-	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarc_info','FieldList'=>'instanceid,id,arc_info_phone,arc_info_org,arc_info_name,arc_info_family,arc_info_login,arc_info_email','Sort'=>$sort, 'WhereClause' => $whereclause,'Limit'=>$limit,'Offset'=>$offset,'archived'=>$archived));
+	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarc_info','FieldList'=>'instanceid,id,arc_info_org,arc_info_login,arc_info_family,arc_info_phone,arc_info_name,arc_info_email','Sort'=>$sort, 'WhereClause' => $whereclause,'Limit'=>$limit,'Offset'=>$offset,'archived'=>$archived));
 	} else {
-	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarc_info','FieldList'=>'instanceid,id,arc_info_phone,arc_info_org,arc_info_name,arc_info_family,arc_info_login,arc_info_email','Sort'=>$sort, 'WhereClause' => $whereclause));
+	    $res = $this->jservice->get(array('Action' => 'GetViewData', 'ViewName' => 'v_autoarc_info','FieldList'=>'instanceid,id,arc_info_org,arc_info_login,arc_info_family,arc_info_phone,arc_info_name,arc_info_email','Sort'=>$sort, 'WhereClause' => $whereclause));
 	}
 	$root = new stdClass();
-	$root->total = $this->jservice->get(array('Action' => 'CountView', 'ViewName' => 'v_autoarc_info','FieldList'=>'instanceid,id,arc_info_phone,arc_info_org,arc_info_name,arc_info_family,arc_info_login,arc_info_email', 'WhereClause' => $whereclause,'archived'=>$archived));
+	$root->total = $this->jservice->get(array('Action' => 'CountView', 'ViewName' => 'v_autoarc_info','FieldList'=>'instanceid,id,arc_info_org,arc_info_login,arc_info_family,arc_info_phone,arc_info_name,arc_info_email', 'WhereClause' => $whereclause,'archived'=>$archived));
 	$root->success = true;
 	$root->rows = $res;
 	return $root;

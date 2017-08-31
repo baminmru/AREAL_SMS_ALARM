@@ -16,6 +16,7 @@
                 ,'phone' =>   $this->input->get_post('phone', TRUE)
                 ,'email' =>   $this->input->get_post('email', TRUE)
                 ,'login' =>   $this->input->get_post('login', TRUE)
+                ,'isadmin' =>   $this->input->get_post('isadmin', TRUE)
             );
             $arc_info = $this->m_arc_info->setRow($data);
             print json_encode($arc_info);
@@ -31,6 +32,7 @@
                 ,'phone' =>   $this->input->get_post('phone', TRUE)
                 ,'email' =>   $this->input->get_post('email', TRUE)
                 ,'login' =>   $this->input->get_post('login', TRUE)
+                ,'isadmin' =>   $this->input->get_post('isadmin', TRUE)
             );
                 $instanceid =  $this->input->get_post('instanceid', TRUE);
             $arc_info= $this->m_arc_info->newRow($instanceid,$data);

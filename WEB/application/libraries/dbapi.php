@@ -30,7 +30,7 @@ class B2service
         $this->SessionData['SessionID'] = isset($this->request['SessionID']) ? $this->request['SessionID'] : '';
 		
         // логинится можно без сессии, все остальное - только с валидной сессией
-        if ($this->action != 'Login' ) {
+        if ($this->action != 'Login'  and $this->action != 'Register') {
             if (empty($this->SessionData['SessionID'])) {
                 throw new Exception('Session ID not set!');
             }
@@ -84,6 +84,55 @@ class B2service
 	
 	
 	
+	// проверка наличия пользователя, регистрация сессии.
+    public function Register()
+	{
+        $user = isset($this->request['user']) ? $this->request['user'] : '';
+        $pass = isset($this->request['pass']) ? $this->request['pass'] : '';
+		$first = isset($this->request['first']) ? $this->request['first'] : '';
+		$last = isset($this->request['last']) ? $this->request['last'] : '';
+		$phone = isset($this->request['phone']) ? $this->request['phone'] : '';
+		$email = isset($this->request['email']) ? $this->request['email'] : '';
+		//'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+		
+			
+		$fields .= '\''.$this->db->real_escape_string($user).'\'';
+		$fields .= ',\''.$this->db->real_escape_string($pass).'\'';
+		$fields .= ',\''.$this->db->real_escape_string($first).'\'';
+		$fields .= ',\''.$this->db->real_escape_string($last).'\'';
+		$fields .= ',\''.$this->db->real_escape_string($phone).'\'';
+		$fields .= ',\''.$this->db->real_escape_string($email).'\'';
+			
+		$q='CALL user_register (' . $fields . ')';
+				
+		$result = array();
+		if ($this->db->multi_query($q)) {
+			do {
+				/* store last result set */
+				if ($resultset = $this->db->store_result()) {
+					$result = array();
+					while ($row = $resultset->fetch_assoc()) {
+						$result[] = $row;
+					}
+					$resultset->free();
+				}
+			
+				if ($this->db->more_results()) {
+			
+				}
+				if ($this->config['log']==true)		
+					file_put_contents($this->config['logpath'].'/_debug.txt', '>>>: '.json_encode($result) .'\r\n', FILE_APPEND);
+		
+			} while ($this->db->next_result());
+		}
+		
+		
+		
+		return $result[0]['result'];
+		
+		
+
+    }
 	
 	
 	
@@ -1203,7 +1252,8 @@ class B2service
         $res = $this->db->query("select  b2g(arc_infoid) userid , 
 		    b2g(arc_info.instanceid)  clientid, 
 			arc_info.login, 
-		    concat( ifnull(arc_info.family,''),' 	   ',ifnull(arc_info.name,'') ) info
+		    concat( ifnull(arc_info.family,''),' 	   ',ifnull(arc_info.name,'') ) info,
+			arc_info.isadmin
 		   from  the_Session 
 			join users on   the_session.usersid = users.usersid
 			join arc_info on users.login=arc_info.login
@@ -2319,10 +2369,13 @@ class B2service
 					'SELECT count(*) FROM ' . $this->db->real_escape_string($viewname) . $whereclause."
 					\r\n"			, FILE_APPEND);
 				
-        $row = $this->db->query('SELECT count(*) FROM ' . $this->db->real_escape_string($viewname) . $whereclause)->fetch_array(MYSQLI_NUM);
-		
-		
-        return $row[0];
+        $stmt= $this->db->query('SELECT count(*) FROM ' . $this->db->real_escape_string($viewname) . $whereclause);
+		if($stmt){
+			$row= $stmt->fetch_array(MYSQLI_NUM);
+			return $row[0];
+		}
+		return 0;
+        
     }
 	
 
@@ -4138,3 +4191,4 @@ class B2service
 		
 }
 ?>
+

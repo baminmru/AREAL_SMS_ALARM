@@ -53,14 +53,14 @@ class  M_armd_type extends CI_Model {
 	    if (count($res)) {
 	        return $res;
 	    } else {
-	        return null;
+	        return array();
 	    }
 		}
     function getRowsByInstance($id,$sort=array())
 		{
 	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(armd_typeid) as armd_typeid, B2G(armd_typeid) as id,B2G(instanceid) as instanceid, armd_type_BRIEF_F(armd_typeid , NULL) as  brief,name', 'ViewName' => 'armd_type', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
-	    return null;
+	    return array();
 	} else {
 	    return $res;
 	}

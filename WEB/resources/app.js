@@ -40,6 +40,7 @@ var menuPanel;
 var leftPanel;
 var contentPanel;
 var stateFulSystem=true;
+var isadmin=0;
 
 
 Ext.onReady(function () {
@@ -335,7 +336,7 @@ function MyInit(){
 	*/
     
 	var app_info_loaded=false;
-	app_info = Ext.create('Ext.data.Store', {
+		app_info = Ext.create('Ext.data.Store', {
         model:'application_info',
         autoLoad: false,
         autoSync: false,
@@ -353,8 +354,15 @@ function MyInit(){
        'load': function(){
 		app_info_loaded =true;
 		combo_StoreLoaded=true; 
+		isadmin=app_info.getAt(0).get("isadmin");
 		var comp=menuPanel.down("#sessionInfo"); 
 	    comp.setValue('Пользователь: '+app_info.getAt(0).get("info") ); //+ '. (' + app_info.getAt(0).get("rolename") +') Л.С.:' + app_info.getAt(0).get("mailcount") );
+		if(isadmin==-1){
+			//menuPanel.down('#actionDict').setDisabled(false); 
+			menuPanel.down('#actionDict').setVisible(true);
+		}else{
+			//menuPanel.down('#actionDict').setVisible(false);
+		}
 	   }
        }
     });
@@ -432,7 +440,7 @@ function MyInit(){
              }
 });
 
-	
+	//adminMenu
 
     menuPanel = new Ext.panel.Panel({
 	    //title:' ',
@@ -454,6 +462,7 @@ function MyInit(){
 				{
 					itemId:'actionDict',
 				    text:'Справочники',
+					hidden:true,
                     iconCls:'icon-book_open',
                     menu:[actionarmd,actionarc] 
 				

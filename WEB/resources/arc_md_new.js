@@ -303,7 +303,7 @@ var p1;
                 }]
             }],
         columns: [
-{text: "Модуль", width:200, dataIndex: 'mymodule_grid', sortable: true}
+{text: "Серийный номер модуля", width: 200, dataIndex: 'moduleserial', sortable: true }
             ,
 {text: "Название", width: 200, dataIndex: 'name', sortable: true }
             ,
@@ -375,33 +375,23 @@ initComponent: function(){
         border:false, 
         items: [
 {
+xtype:  'hidden',
+name:   'mymodule',
+fieldLabel:  'Модуль'
+}
+,
+{
         minWidth: 740,
         width: 740,
         maxWidth: 740,
         x: 5, 
         y: 0, 
 
-xtype:  'combobox',
-trigger1Cls:        'x-form-select-trigger', 
-hideTrigger1:false, 
-onTrigger1Click : function(){ 
-		if(this.isExpanded) {
-			this.collapse(); 
-		}else{ 
-			if(this.store.count(false)==0) this.store.load();
-			this.expand();
-		}
-},
-editable: false,
-listeners:{  select: function ( combo, records, eOpts ) {combo.up('form' ).activeRecord.set('mymodule', records.get('id'));}  },
-store: cmbstore_armd_info,
-valueField:     'brief',
-displayField:   'brief',
-//typeAhead: true,
-emptyText:      '',
-name:   'mymodule_grid',
-itemId:   'mymodule_grid',
-fieldLabel:  'Модуль',
+xtype:  'textfield',
+value:  '',
+name:   'moduleserial',
+itemId:   'moduleserial',
+fieldLabel:  'Серийный номер модуля',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
        ,labelWidth: 120
@@ -528,10 +518,14 @@ allowBlank:true
                     instanceid: this.instanceid
                     ,arc_mdid: active.get('arc_mdid')
                     ,mymodule: active.get('mymodule') 
+                    ,moduleserial: active.get('moduleserial') 
                     ,name: active.get('name') 
                     ,deivetype: active.get('deivetype') 
                     ,theaddress: active.get('theaddress') 
                     ,master_fio: active.get('master_fio') 
+                    ,roof_no: active.get('roof_no') 
+                    ,pop_no: active.get('pop_no') 
+                    ,power_no: active.get('power_no') 
                 }
                 , success: function(response){
                 var text = response.responseText;

@@ -18,13 +18,10 @@ Ext.define('grid_autoarsms_data', {
         store: store_v_autoarsms_data,
         features: [groupingFeature_autoarsms_data],
         defaultDockWeights : { top: 7, bottom: 5, left: 1, right: 3 },
-		default_filter:[{key:'clientid',value:app_info.getAt(0).get("clientid")}],
         // viewConfig: {               enableTextSelection: true        },
         dockedItems: [{
                 xtype:  'toolbar',
-                     items: [
-					 /*
-					 {
+                     items: [{
                     iconCls:  'icon-application_form_add',
                     text:   'Создать',
                     scope:  this,
@@ -43,8 +40,7 @@ Ext.define('grid_autoarsms_data', {
                     itemId:  'delete',
                     scope:  this,
                     handler : this.onDeleteClick
-                    },
-*/					{
+                    }, {
                     iconCls:  'icon-table_refresh',
                     text:   'Обновить',
                     itemId:  'bRefresh',
@@ -59,23 +55,17 @@ Ext.define('grid_autoarsms_data', {
                 }]
             }],
         columns: [
-            {text: "Дата и Время СМС", width:120, dataIndex: 'arsms_data_smstime', sortable: true,renderer:myDateRenderer}
+            {text: "Дата и Время СМС", width:133, dataIndex: 'arsms_data_smstime', sortable: true,renderer:myDateRenderer}
             ,
-            {text: "Телефон отправителя", width:120, dataIndex: 'arsms_data_phone', sortable: true}
+            {text: "Серийный номер", width:133, dataIndex: 'arsms_data_serialno', sortable: true}
             ,
-            {text: "Серийный номер", width:120, dataIndex: 'arsms_data_serialno', sortable: true}
+            {text: "Температура", width:133, dataIndex: 'arsms_data_temperature', sortable: true}
             ,
-            {text: "Код оператора", width:120, dataIndex: 'arsms_data_opercode', sortable: true}
+            {text: "Поплавок-норма", width:133, dataIndex: 'arsms_data_pop_ok', sortable: true}
             ,
-            {text: "Контрольный код", width:120, dataIndex: 'arsms_data_controlcode', sortable: true}
+            {text: "Крышка открыта", width:133, dataIndex: 'arsms_data_roof_open', sortable: true}
             ,
-            {text: "Температура", width:120, dataIndex: 'arsms_data_temperature', sortable: true}
-            ,
-            {text: "Поплавок-норма", width:120, dataIndex: 'arsms_data_pop_ok', sortable: true}
-            ,
-            {text: "Крышка открыта", width:120, dataIndex: 'arsms_data_roof_open', sortable: true}
-            ,
-            {text: "Питание в норме", width:120, dataIndex: 'arsms_data_power_ok', sortable: true}
+            {text: "Питание в норме", width:133, dataIndex: 'arsms_data_power_ok', sortable: true}
         ]
         ,
         bbar: Ext.create('Ext.PagingToolbar', {
@@ -139,45 +129,12 @@ listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), te
 {
 
 value:  '',
-name:   'arsms_data_phone',
-itemId:   'arsms_data_phone',
-fieldLabel:  '',
-emptyText:      'Телефон отправителя',
-hideLabel:  true,
-listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), text: 'Телефон отправителя'});}}
-}
-,
-{
-
-value:  '',
 name:   'arsms_data_serialno',
 itemId:   'arsms_data_serialno',
 fieldLabel:  '',
 emptyText:      'Серийный номер',
 hideLabel:  true,
 listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), text: 'Серийный номер'});}}
-}
-,
-{
-
-value:  '',
-name:   'arsms_data_opercode',
-itemId:   'arsms_data_opercode',
-fieldLabel:  '',
-emptyText:      'Код оператора',
-hideLabel:  true,
-listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), text: 'Код оператора'});}}
-}
-,
-{
-
-value:  '',
-name:   'arsms_data_controlcode',
-itemId:   'arsms_data_controlcode',
-fieldLabel:  '',
-emptyText:      'Контрольный код',
-hideLabel:  true,
-listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), text: 'Контрольный код'});}}
 }
 ,
 {
@@ -358,27 +315,15 @@ listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), te
         );
         this.callParent();
         this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
-		
-		if(this.default_filter!=null){
-			var filters = new Array();
-			for (var i=0; i< this.default_filter.length;i++) {
-				var kv=this.default_filter[i];
-				filters.push({property: kv.key, value: kv.value});
-			}
-		}
-		
-		if (filters.length>0) 
-			this.store.filter(filters); 
-		else 
-		   this.store.load();
+        this.store.load()
        },
         onSelectChange: function(selModel, selections){
-        //this.down('#delete').setDisabled(selections.length === 0);
-        //this.down('#edit').setDisabled(selections.length === 0);
+        this.down('#delete').setDisabled(selections.length === 0);
+        this.down('#edit').setDisabled(selections.length === 0);
     },
     listeners: {
         itemdblclick: function() { 
-    	   // this.onEditClick();
+    	    this.onEditClick();
         }
         ,
         	added:function(){

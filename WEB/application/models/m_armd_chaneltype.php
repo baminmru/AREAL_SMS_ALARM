@@ -53,14 +53,14 @@ class  M_armd_chaneltype extends CI_Model {
 	    if (count($res)) {
 	        return $res;
 	    } else {
-	        return null;
+	        return array();
 	    }
 		}
     function getRowsByInstance($id,$sort=array())
 		{
 	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(armd_chaneltypeid) as armd_chaneltypeid, B2G(armd_chaneltypeid) as id,B2G(instanceid) as instanceid, armd_chaneltype_BRIEF_F(armd_chaneltypeid , NULL) as  brief,name', 'ViewName' => 'armd_chaneltype', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
-	    return null;
+	    return array();
 	} else {
 	    return $res;
 	}
