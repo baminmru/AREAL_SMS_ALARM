@@ -1,4 +1,70 @@
-﻿Ext.define('iu.window', {
+﻿
+var scrollSize=20;
+function WidthIf(w,delta){
+	 delta = (typeof delta !== 'undefined') ?  delta : 0;
+	 console.log("window width: "+ window.innerWidth);
+	if(window.innerWidth-scrollSize-delta < w) 
+		return window.innerWidth-scrollSize - delta;
+	else
+		return w;
+}
+function WidthIf2(w,delta){
+	delta = (typeof delta !== 'undefined') ?  delta : 0;
+	if(window.innerWidth-scrollSize-delta < w*2) 
+		return (window.innerWidth-scrollSize-delta)/2;
+	else
+		return w;
+}
+function WidthIf3(w,delta){
+	delta = (typeof delta !== 'undefined') ?  delta : 0;
+	if(window.innerWidth-scrollSize -delta < w*3) 
+		return (window.innerWidth-scrollSize-delta)/3;
+	else
+		return w;
+}
+function WidthIf3_2(w,delta){
+	delta = (typeof delta !== 'undefined') ?  delta : 0;
+	if(window.innerWidth-scrollSize -delta < w*3) 
+		return (window.innerWidth-scrollSize-delta)/3*2;
+	else
+		return w;
+}
+
+function WidthIf4(w,delta){
+	delta = (typeof delta !== 'undefined') ?  delta : 0;
+	if(window.innerWidth-scrollSize -delta < w*4) 
+		return (window.innerWidth-scrollSize-delta)/4;
+	else
+		return w;
+}
+
+function HeightIf(h,delta){
+	 delta = (typeof delta !== 'undefined') ?  delta : 0;
+	 console.log("window height: "+ window.innerHeight);
+	if(window.innerHeight-delta < h) 
+		return window.innerHeight-delta;
+	else
+		return h;
+}
+
+
+function AllowConstraint(){
+	if(window.innerWidth< 640) 
+		return false;
+	else
+		return true;
+}
+
+function TextIf(sText,sShortText){
+	sShortText = (typeof sShortText !== 'undefined') ?  sShortText : '';
+	if(window.innerWidth< 400) 
+		return sShortText;
+	else
+		return sText;
+}
+
+
+Ext.define('iu.window', {
 	extend: 'Ext.window.Window',
 	closeAction:'destroy',
 	modal : true,
@@ -81,7 +147,7 @@ Ext.define('iu.windowObjects', {
     extend:'iu.window',
     maxHeight: 650,
     minHeight: 620,
-    minWidth: 820,
+    minWidth: WidthIf(820),
     maxWidth: 1024,
    
     border: 0,
@@ -377,7 +443,7 @@ function ShowText(t,s){
 		x:50,
 		y:50,
 		height:600,
-		width:750,
+		width:WidthIf(750),
 		title:t,
 		hidden:true,
 		layout:'fit',
@@ -416,7 +482,7 @@ function ShowText(t,s){
 					labelAlign:'top',
 					allowBlank:true,
 					readOnly:true,
-					labelWidth: 120
+					labelWidth: WidthIf2(120)
 				}
 				
 		
@@ -453,8 +519,13 @@ Ext.define('Form_sp_password',
 			  
 						url:rootURL+'index.php/app/setSPPassword',
 						layout:'absolute',
+						 fieldDefaults: {
+							labelAlign: 'top',
+							msgTarget: 'side'
+						},
 						items:[
 							{
+								labelAlign: 'top',
 								fieldLabel:'Старый пароль',
 								name:'oldPassword',
 								itemId:'oldPassword',
@@ -464,14 +535,15 @@ Ext.define('Form_sp_password',
 								x:5,
 								y:5,
 								labelWidth :170,
-								minWidth: 270,
-								width: 270,
+								minWidth: WidthIf(270,10),
+								width: WidthIf(270,10),
 								maxWidth: 270 //,
 								//minLength:8,
 								//minLengthText : 'Длинна пароля не менее 8 символов'
 							}
 							,
 							{
+								labelAlign: 'top',
 								fieldLabel:'Новый пароль',
 								name:'newPassword',
 								itemId:'newPassword',
@@ -479,15 +551,16 @@ Ext.define('Form_sp_password',
 								allowBlank:false,
 								value:'',
 								x:5,
-								y:35,
+								y:60,
 								labelWidth :170,
-								minWidth: 270,
-								width: 270,
+								minWidth: WidthIf(270,10),
+								width: WidthIf(270,10),
 								maxWidth: 270,
 								minLength:8,
 								minLengthText : 'Длинна пароля не менее 8 символов'
 							},
 							{
+								labelAlign: 'top',
 								fieldLabel:'Подтверждение пароля',
 								name:'compPassword',
 								itemId:'compPassword',
@@ -495,10 +568,10 @@ Ext.define('Form_sp_password',
 								allowBlank:false,
 								value:'',
 								x:5,
-								y:70,
+								y:110,
 								labelWidth :170,
-								minWidth: 270,
-								width: 270,
+								minWidth: WidthIf(270,10),
+								width: WidthIf(270,10),
 								maxWidth: 270,
 								minLength:8,
 								minLengthText : 'Длинна пароля не менее 8 символов'
@@ -514,6 +587,7 @@ Ext.define('Form_sp_password',
 							ui:     'footer',
 							items: ['->', 
 								{
+									scale:'large',
 									iconCls:  'icon-accept',
 									itemId:  'save',
 									text:   'Сохранить',
@@ -560,7 +634,7 @@ Ext.define('Form_sp_password',
 															icon:   Ext.MessageBox.ERROR
 															});
 														}
-
+ 
 													}
 												);
 											}else{
@@ -575,6 +649,7 @@ Ext.define('Form_sp_password',
 									}
 								}, 
 								{
+									scale:'large',
 									iconCls:  'icon-cancel',
 									text:   'Закрыть',
 									scope:  this,
@@ -598,8 +673,8 @@ Ext.define('Form_sp_password',
 Ext.define('EditWindow_sp_password',{
     extend:  'Ext.window.Window',
 constrainHeader:true,
-    height: 160,
-    width: 300,
+    height: 200,
+    width: WidthIf(300,10),
     layout:  'fit',
     autoShow: true,
     modal: true,

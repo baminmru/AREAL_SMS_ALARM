@@ -57,6 +57,8 @@
             ,{name:'msg_crash_grid', type: 'string'}
             ,{name:'ch_taype', type: 'string'}
             ,{name:'ch_taype_grid', type: 'string'}
+            ,{name:'chanelname', type: 'string'}
+            ,{name:'chanelcomment', type: 'string'}
             ,{name:'ch_on', type: 'int'}
             ,{name:'ch_on_grid', type: 'string'}
         ]

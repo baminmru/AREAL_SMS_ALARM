@@ -1,4 +1,27 @@
 ﻿
+
+Ext.define('EditWindow_uw_password',{
+    extend:  'Ext.window.Window',
+    height: 140,
+    width: 300,
+    layout:  'fit',
+    autoShow: true,
+    modal: true,
+    closeAction: 'destroy',
+    iconCls:  'icon-user_key',
+    title:  'Изменить пароль',
+    items:[
+		{
+			xtype:'f_uw_password'
+		}
+	]
+	}
+);
+//////////////////////////////////////////////////////
+
+
+
+
 var groupingFeature_autoarc_info = Ext.create('Ext.grid.feature.Grouping',{
 groupByText:  'Группировать по этому полю',
 showGroupsText:  'Показать группировку'
@@ -23,49 +46,56 @@ Ext.define('grid_autoarc_info', {
                 xtype:  'toolbar',
                      items: [{
                     iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                    text:   TextIf('Создать'),
                     scope:  this,
                     handler : this.onAddClick
                     }, {
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     itemId:  'edit',
                     disabled: true,
                     scope:  this,
                     handler : this.onEditClick
                     }, {
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                     handler : this.onDeleteClick
                     }, {
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : this.onRefreshClick
-                   } , {
+                   }, {
+                    iconCls:  'icon-user_key',
+                    text:   'Изменить пароль',
+                    disabled: true,
+                    itemId:  'password',
+                    scope:  this,
+                    handler : this.onPassword
+                    } , {
                     iconCls:  'icon-page_excel',
-                    text:   'Экспорт',
+                    text:   TextIf('Экспорт'),
                     itemId:  'bExport',
                     scope:  this,
                     handler: this.onExportClick
                 }]
             }],
         columns: [
-            {text: "Фамилия", width:133, dataIndex: 'arc_info_family', sortable: true}
+            {text: "Фамилия", width:WidthIf4(133), dataIndex: 'arc_info_family', sortable: true}
             ,
-            {text: "Имя", width:133, dataIndex: 'arc_info_name', sortable: true}
+            {text: "Имя", width:WidthIf4(133), dataIndex: 'arc_info_name', sortable: true}
             ,
-            {text: "Организация", width:133, dataIndex: 'arc_info_org', sortable: true}
+            {text: "Организация", width:WidthIf4(133), dataIndex: 'arc_info_org', sortable: true}
             ,
-            {text: "Телефон", width:133, dataIndex: 'arc_info_phone', sortable: true}
+            {text: "Телефон", width:WidthIf4(133), dataIndex: 'arc_info_phone', sortable: true}
             ,
-            {text: "E-Mail", width:133, dataIndex: 'arc_info_email', sortable: true}
+            {text: "E-Mail", width:WidthIf4(133), dataIndex: 'arc_info_email', sortable: true}
             ,
-            {text: "Логин", width:133, dataIndex: 'arc_info_login', sortable: true}
+            {text: "Логин", width:WidthIf4(133), dataIndex: 'arc_info_login', sortable: true}
         ]
         ,
         bbar: Ext.create('Ext.PagingToolbar', {
@@ -88,8 +118,8 @@ Ext.define('grid_autoarc_info', {
 					animCollapse: false, 
 					titleCollapse:true,
 					bodyPadding:5,
-					width:200,
-					minWidth:200,
+					width:WidthIf3(200),
+					minWidth:WidthIf3(200),
 					autoScroll:true,
                     buttonAlign:  'center',
 					layout: {
@@ -224,6 +254,7 @@ listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), te
         onSelectChange: function(selModel, selections){
         this.down('#delete').setDisabled(selections.length === 0);
         this.down('#edit').setDisabled(selections.length === 0);
+		this.down('#password').setDisabled(selections.length === 0);
     },
     listeners: {
         itemdblclick: function() { 
@@ -240,6 +271,172 @@ listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), te
         		//clearInterval(interval_autoarc_info);
         }
     },
+	onPassword:function(){
+		  var selection = this.getView().getSelectionModel().getSelection()[0];
+		  if (selection) {
+				usr_instanceid = selection.get('instanceid');
+				var changePassPanel;
+				changePassPanel= new Ext.form.Panel(
+				{			
+					url:rootURL+'index.php/app/setSPPassword',
+					layout:'absolute',
+					
+					items:[
+					{
+						labelAlign: 'top',
+						xtype:  'textfield',
+						fieldLabel:'Новый пароль',
+						name:'newpassword',
+						itemId:'newpassword',
+						inputType:'password',
+						allowBlank:false,
+						value:'',
+						x:5,
+						y:5,
+						labelWidth :170,
+						minWidth: WidthIf(270,10),
+						width: WidthIf(270,10),
+						maxWidth: 270,
+						minLength:8,
+						minLengthText : 'Длинна пароля не менее 8 символов'
+					},
+					{
+						labelAlign: 'top',
+						xtype:  'textfield',
+						fieldLabel:'Подтверждение пароля',
+						name:'comppassword',
+						itemId:'comppassword',
+						inputType:'password',
+						allowBlank:false,
+						value:'',
+						x:5,
+						y:60,
+						labelWidth :170,
+						minWidth: WidthIf(270,10),
+						width: WidthIf(270,10),
+						maxWidth: 270,
+						minLength:8,
+						minLengthText : 'Длинна пароля не менее 8 символов'
+					},
+					{
+						name:'instanceid',
+						itemId:'instanceid',
+						xtype:  'textfield',
+						hidden:true
+					}
+						
+					],
+				   
+					dockedItems: 
+					[
+						{
+						xtype:  'toolbar',
+						dock:   'bottom',
+						ui:     'footer',
+						items: ['->', 
+							{
+								scale:'large',
+								iconCls:  'icon-accept',
+								itemId:  'save',
+								text:   'Сохранить',
+								disabled: false,
+								scope:  this,
+								handler:function()
+								{
+									var form = changePassPanel.getForm();
+									if(form.isValid()){
+										if(form.getFields().items[0].getValue()==form.getFields().items[1].getValue())
+										{
+											form.getFields().items[2].setValue(usr_instanceid);
+												form.submit(
+												{
+													url: 'index.php/app/AdminPassword',
+													waitMsg: 'Сохранение...',
+													success: function(f,response){
+														var text = response.result.msg;
+														//var res =Ext.decode(text);
+														if(text=="OK"){
+															Ext.MessageBox.show({
+															title:  'Подтверждение',
+															msg:    'Изменения сохранены',
+															buttons: Ext.MessageBox.OK,
+															icon:   Ext.MessageBox.INFO
+															});
+															var wn = this.form.owner.ownerCt;
+															wn.close();
+														}else{
+															Ext.MessageBox.show({
+																title:  'Ошибка',
+																msg:    text,
+																buttons: Ext.MessageBox.OK,
+																icon:   Ext.MessageBox.ERROR
+															});
+														}
+													}
+													,
+													
+													failure: function(f,response) {
+														var text = response.result.msg;
+														Ext.MessageBox.show({
+														title:  'Ошибка',
+														msg:    text,
+														buttons: Ext.MessageBox.OK,
+														icon:   Ext.MessageBox.ERROR
+														});
+													}
+
+												}
+											);
+										}else{
+											Ext.MessageBox.show({
+												title:  'Ошибка',
+												msg:    'Новый пароль не совпадает с подтверждением пароля',
+												buttons: Ext.MessageBox.OK,
+												icon:   Ext.MessageBox.ERROR
+												}); 
+										}
+									}
+								}
+							}, 
+							{
+								scale:'large',
+								iconCls:  'icon-cancel',
+								text:   'Закрыть',
+								scope:  this,
+								handler : function(){
+								
+									var wn = changePassPanel.form.owner.ownerCt;
+									wn.close();
+								} //this.onReset
+							}
+						]
+						}
+					] // dockedItems
+				}
+				);
+		
+		
+		
+				var edit  = new Ext.Window({
+					title:'Смена пароля',
+					itemId:'chpass_win',
+					layout:'fit',
+					constrainHeader:true,
+					width:WidthIf(400),
+					height:220,
+					closable:true,
+					modal:true,
+					resizable:false,
+					plain:true,
+					border:false,
+					items:[changePassPanel]
+				});
+				edit.show();
+		}
+		  
+	
+				
+	},
     onDeleteConfirm:function(selection){
       if (selection) {
         Ext.Ajax.request({
@@ -375,9 +572,9 @@ Ext.define('ObjectWindow_arc', {
     extend:  'Ext.window.Window',
     maxHeight: 620,
     minHeight: 620,
-    minWidth: 800,
-    maxWidth: 1024,
-    constrainHeader :true,
+    minWidth:WidthIf(800),
+    maxWidth: WidthIf4(1024),
+    constrainHeader :AllowConstraint(),
     layout:  'fit',
     autoShow: true,
     closeAction: 'destroy',

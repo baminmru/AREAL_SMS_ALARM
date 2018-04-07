@@ -41,6 +41,9 @@ var leftPanel;
 var contentPanel;
 var stateFulSystem=true;
 var isadmin=0;
+var defaultMenuDisabled=false;
+var defaultMenuHidden=false;
+var main_win;
 
 
 Ext.onReady(function () {
@@ -114,6 +117,7 @@ function MakeExit(btn){
 					url: rootURL+'index.php/app/logout',
 					method:  'POST',
 					success: function(response){
+						main_win.close();
 						document.location=document.location;
 						
 					}
@@ -125,8 +129,9 @@ function MakeExit(btn){
 
 var actionEXIT = Ext.create('Ext.Action', {
 	itemId:'actionEXIT',
-	text: 'Выход',
+	text: TextIf('Выход'),
 	iconCls: 'icon-door',
+	scale:'large',
 	disabled:false,
 	handler: function(){
 		Ext.Msg.confirm('Выход из приложения?',
@@ -151,8 +156,9 @@ var actionEXIT = Ext.create('Ext.Action', {
 var actionChangePassword = Ext.create('Ext.Action', 
 {
 	itemId:'actionChangePassword',
-	text: 'Сменить пароль',
+	text: TextIf('Сменить пароль'),
 	iconCls: 'icon-building_key',
+	scale:'large',
 	disabled:false,
 	handler: function() {
 		
@@ -164,6 +170,7 @@ var actionChangePassword = Ext.create('Ext.Action',
 			
 			items:[
 			{
+				labelAlign: 'top',
 				xtype:  'textfield',
 				fieldLabel:'Старый пароль',
 				name:'oldPassword',
@@ -174,14 +181,15 @@ var actionChangePassword = Ext.create('Ext.Action',
 				x:5,
 				y:5,
 				labelWidth :170,
-				minWidth: 270,
-				width: 270,
+				minWidth: WidthIf(270,10),
+				width: WidthIf(270,10),
 				maxWidth: 270 //,
 				//minLength:8,
 				//minLengthText : 'Длинна пароля не менее 8 символов'
 			}
 				,
 			{
+				labelAlign: 'top',
 				xtype:  'textfield',
 				fieldLabel:'Новый пароль',
 				name:'newPassword',
@@ -190,15 +198,16 @@ var actionChangePassword = Ext.create('Ext.Action',
 				allowBlank:false,
 				value:'',
 				x:5,
-				y:35,
+				y:60,
 				labelWidth :170,
-				minWidth: 270,
-				width: 270,
+				minWidth: WidthIf(270,10),
+				width: WidthIf(270,10),
 				maxWidth: 270,
 				minLength:8,
 				minLengthText : 'Длинна пароля не менее 8 символов'
 			},
 			{
+				labelAlign: 'top',
 				xtype:  'textfield',
 				fieldLabel:'Подтверждение пароля',
 				name:'compPassword',
@@ -207,10 +216,10 @@ var actionChangePassword = Ext.create('Ext.Action',
 				allowBlank:false,
 				value:'',
 				x:5,
-				y:70,
+				y:115,
 				labelWidth :170,
-				minWidth: 270,
-				width: 270,
+				minWidth: WidthIf(270,10),
+				width: WidthIf(270,10),
 				maxWidth: 270,
 				minLength:8,
 				minLengthText : 'Длинна пароля не менее 8 символов'
@@ -226,6 +235,7 @@ var actionChangePassword = Ext.create('Ext.Action',
 				ui:     'footer',
 				items: ['->', 
 					{
+						scale:'large',
 						iconCls:  'icon-accept',
 						itemId:  'save',
 						text:   'Сохранить',
@@ -252,7 +262,6 @@ var actionChangePassword = Ext.create('Ext.Action',
 													});
 													var wn = this.form.owner.ownerCt;
 													wn.close();
-													spData.load();
 												}else{
 													Ext.MessageBox.show({
 														title:  'Ошибка',
@@ -287,6 +296,7 @@ var actionChangePassword = Ext.create('Ext.Action',
 						}
 					}, 
 					{
+						scale:'large',
 						iconCls:  'icon-cancel',
 						text:   'Закрыть',
 						scope:  this,
@@ -309,7 +319,7 @@ var actionChangePassword = Ext.create('Ext.Action',
 				itemId:'chpass_win',
 				layout:'fit',
 				constrainHeader:true,
-				width:400,
+				width:WidthIf(400),
 				height:300,
 				closable:true,
 				modal:true,
@@ -356,7 +366,7 @@ function MyInit(){
 		combo_StoreLoaded=true; 
 		isadmin=app_info.getAt(0).get("isadmin");
 		var comp=menuPanel.down("#sessionInfo"); 
-	    comp.setValue('Пользователь: '+app_info.getAt(0).get("info") ); //+ '. (' + app_info.getAt(0).get("rolename") +') Л.С.:' + app_info.getAt(0).get("mailcount") );
+	    comp.setValue(TextIf(app_info.getAt(0).get("info")) ); 
 		if(isadmin==-1){
 			//menuPanel.down('#actionDict').setDisabled(false); 
 			menuPanel.down('#actionDict').setVisible(true);
@@ -419,8 +429,9 @@ function MyInit(){
 	
 	var actionarc_my = Ext.create('Ext.Action', {
     itemId:             'actionarc',
-    text:               'Настройки',
+    text:               TextIf('Настройки'),
     iconCls:            'icon-user',
+	scale:				'large',
 			 disabled:defaultMenuDisabled,
 			 hidden:defaultMenuHidden,
              handler: function(){
@@ -446,38 +457,44 @@ function MyInit(){
 	    //title:' ',
 		// hideHeaders:true,
         xtype:'panel',
+		height:44,
+		width: WidthIf(640,40),
         region:'north',
         dockedItems:{
             itemId:'toolbar',
             xtype:'toolbar',
             items:[ 
-                {
+					actionarc_my,actionarsms,actionChangePassword
+			
+                /*{
 					itemId:'actionFile',
 				    text:'Файл',
                     iconCls:'icon-folder',
                     menu:[ actionChangePassword,actionEXIT] 
 				
-				}
+				}*/
 				,
 				{
 					itemId:'actionDict',
-				    text:'Справочники',
+				    text:TextIf('Справочники'),
 					hidden:true,
+					scale:'large',
                     iconCls:'icon-book_open',
                     menu:[actionarmd,actionarc] 
 				
-				}
-				,
+				},
+				actionEXIT
+				/*,
 				{
 					itemId:'actionAds',
 				    text:'Информация',
                     iconCls:'icon-box_picture',
                     menu:[actionarc_my,actionarsms ] 
 				
-				}
+				}*/
 				
 				,'->',
-				,
+				
 				{
 					itemId:'sessionInfo',
 					xtype:'displayfield',
@@ -498,7 +515,11 @@ function MyInit(){
         region:'center',
         xtype:'tabpanel', // TabPanel itself has no title
 		splitter:true,
-        activeTab:0      // First tab active by default
+        activeTab:0 ,     // First tab active by default
+		autoScroll: false,
+		minHeight: HeightIf(640,100),
+		height: HeightIf(640,100),
+		width: WidthIf(640,40)
     });
 
 	/*statusPanel = new Ext.Panel( {
@@ -528,21 +549,38 @@ function MyInit(){
 	
 
 	
-
-    var vPort = new Ext.container.Viewport({
+	main_win = new Ext.Window({
+	title:"A-REAL",
+	itemId:'main_win',
+	layout: 'absolute',
+	x:0,
+	y:0,
+    width: WidthIf(4000),
+    height: HeightIf(2000),
+	//constrainHeader:true, 
+    closable:false,
+    modal:false,
+    resizable:false,
+    plain:true,
+    border:false,
+	autoScroll: true,
+    items:[{
+			xtype:'panel',
             layout:'border',
-            renderTo:Ext.getBody(),
-            items:[ /*leftPanel,*/ menuPanel, 
-                contentPanel] //,statusPanel]
-        }
-    );
+			border: false,
+            autoScroll: false,
+			height:HeightIf(2000,45),
+			width:WidthIf(4000,15),
+            items:[  menuPanel,contentPanel] 
+        }]
+});
 
-	//combo_LoadNext();
+
+  main_win.show();
 	
-	//setInterval(function() { app_info.load() }, 60000);
+	
 	
 }
 
-var defaultMenuDisabled=false;
-var defaultMenuHidden=false;
+
 //////////////////////////////////////////////////////

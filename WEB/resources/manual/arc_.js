@@ -70,7 +70,7 @@ function arc_Panel_(objectID, RootPanel, selection){
      arc_= Ext.create('Ext.form.Panel', {
       id: 'arc',
       layout:'fit',
-      width:810, // для правильного расчета размера дочерних окон ! 
+      width: WidthIf(810), // для правильного расчета размера дочерних окон ! 
       height:530,
       fieldDefaults: {
           labelAlign:             'top',
@@ -139,7 +139,7 @@ int_arc_md_
 				text: 'Сохранить',					
 				disabled: false,
 				hidden: false,			
-				x:800,
+				x:5,
 				y:5,	
 				handler: arc_.onButtonOk
 				

@@ -90,7 +90,7 @@ showGroupsText:  'Показать группировку'
          {
         itemId:  id,
         store:  mystore,
-        width:600,
+        width:WidthIf(600),
         header:false,
         layout:'fit',
         scroll:'both',
@@ -104,47 +104,51 @@ showGroupsText:  'Показать группировку'
                 xtype:  'toolbar',
                 items: [
                 {
+                    scale: 'large',
                     iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                    text:   TextIf('Создать'),
                     scope:  this,
                 hidden : true,
                     handler : onAddClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     scope:  this,
                     disabled: true,
                     itemId:  'edit',
                 hidden : true,
                     handler : onEditClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                    hidden : true,
                     handler : onDeleteClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : onRefreshClick
                 }]
             }],
         columns: [
-{text: "Дата и Время СМС", width:110, dataIndex: 'smstime', sortable: true, xtype: 'datecolumn',    renderer:myDateRenderer}
+{text: "Дата и Время СМС", width:WidthIf4(110), dataIndex: 'smstime', sortable: true, xtype: 'datecolumn',    renderer:myDateRenderer}
             ,
-{text: "Серийный номер", width: 200, dataIndex: 'serialno', sortable: true}
+{text: "Серийный номер", width: WidthIf4(200), dataIndex: 'serialno', sortable: true}
             ,
-{text: "Температура", width:60, dataIndex: 'temperature', sortable: true}
+{text: "Температура", width:WidthIf4(60), dataIndex: 'temperature', sortable: true}
             ,
-{text: "Поплавок-норма", width:80, dataIndex: 'pop_ok_grid', sortable: true}
+{text: "Поплавок-норма", width:WidthIf4(80), dataIndex: 'pop_ok_grid', sortable: true}
             ,
-{text: "Крышка открыта", width:80, dataIndex: 'roof_open_grid', sortable: true}
+{text: "Крышка открыта", width:WidthIf4(80), dataIndex: 'roof_open_grid', sortable: true}
             ,
-{text: "Питание в норме", width:80, dataIndex: 'power_ok_grid', sortable: true}
+{text: "Питание в норме", width:WidthIf4(80), dataIndex: 'power_ok_grid', sortable: true}
         ]
        ,
     listeners: {
@@ -200,8 +204,8 @@ initComponent: function(){
         border:false, 
         items: [
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -217,7 +221,7 @@ name:   'smstime',
 itemId:   'smstime',
 fieldLabel:  'Дата и Время СМС',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
 ,
 {
@@ -227,8 +231,8 @@ fieldLabel:  'Телефон отправителя'
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 55, 
@@ -241,7 +245,7 @@ fieldLabel:  'Серийный номер',
 editable: false,
 readOnly: true,
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
 ,
 {
@@ -257,8 +261,8 @@ fieldLabel:  'Контрольный код'
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 110, 
@@ -273,9 +277,9 @@ name:   'temperature',
 itemId:   'temperature',
 fieldLabel:  'Температура',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
-       ], width: 770,
+       ], width: WidthIf(770,10),
        height: 185 
         }
 ,
@@ -291,9 +295,9 @@ allowBlank:true
         x: 0, 
             items: [
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 0, 
 
@@ -312,13 +316,13 @@ itemId:   'pop_ok_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('pop_ok', record.get('value'));}  },
 fieldLabel:  'Поплавок-норма',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth:WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 55, 
 
@@ -337,13 +341,13 @@ itemId:   'roof_open_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('roof_open', record.get('value'));}  },
 fieldLabel:  'Крышка открыта',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth:WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 110, 
 
@@ -362,9 +366,9 @@ itemId:   'power_ok_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('power_ok', record.get('value'));}  },
 fieldLabel:  'Питание в норме',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth:WidthIf(120,10)
 }
-       ], width: 760,
+       ], width: WidthIf(760),
        height: 235 
         } //group
           ],//items = part panel
@@ -374,6 +378,7 @@ allowBlank:true
             dock:   'bottom',
             ui:     'footer',
                 items: ['->', {
+                    scale: 'large',
                     iconCls:  'icon-accept',
                     itemId:  'save',
                     text:   'Сохранить',
@@ -382,6 +387,7 @@ allowBlank:true
                     handler : this.onSave
                 }
                , {
+                    scale: 'large',
                     iconCls:  'icon-cancel',
                     text:   'Закрыть',
                     scope:  this,
@@ -473,11 +479,11 @@ Ext.define('EditWindow_arsms_datamain', {
     maxHeight: 570,
     maxWidth: 900,
     autoScroll:true,
-    minWidth: 750,
-    width: 800,
+    minWidth: WidthIf(750),
+    width:  WidthIf(800),
     minHeight:520,
     height:530,
-    constrainHeader :true,
+    constrainHeader :AllowConstraint(),
     layout:  'absolute',
     autoShow: true,
     modal: true,

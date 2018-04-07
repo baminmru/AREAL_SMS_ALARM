@@ -10,6 +10,7 @@
             ,{name:'arsms_data_pop_ok', type: 'string'}
             ,{name:'arsms_data_temperature', type: 'number'}
             ,{name:'arsms_data_power_ok', type: 'string'}
+			,{name:'arsms_data_opercode', type: 'number'}
         ]
     });
 

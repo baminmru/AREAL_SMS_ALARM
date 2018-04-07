@@ -63,35 +63,128 @@ function doRegister()
 
 
 
+login = new Ext.FormPanel({
+	
+    labelWidth:WidthIf2(100),
+    url:rootURL+'index.php/app/login',
+    frame:true,
+	bodyPadding: 10,
+	x:5,
+	y:5,
+	width: WidthIf(400,30),
+    title:'Вход',
+    defaultType:'textfield',
+	//region:'north',
+    monitorValid:true,
+	height:240,
+	
+	fieldDefaults: {
+        labelAlign: 'top',
+        labelWidth: 115,
+        msgTarget: 'side'
+    },
+    // Specific attributes for the text fields for username / password.
+    // The "name" attribute defines the name of variables sent to the server.
+    items:[
+		{
+			 scale:'large',
+			 xtype:'button',	
+            text:'Войти',
+			iconCls: 'icon-key_go',
+            //formBind:false,
+            // Function that fires when user clicks the button
+            handler:doLogin
+        },
+		{
+        xtype: 'fieldset',
+        title: 'Параметры для входа',
+
+        defaultType: 'textfield',
+        defaults: {
+            anchor: '100%'
+        },
+		items: [
+		 
+        {
+            fieldLabel:'Пользователь',
+            name:'loginUsername',
+			emptyText: 'пользователь',
+			width: WidthIf(380,10),
+            allowBlank:false,
+            value:''
+			,listeners: {
+				specialkey: function(field, e){
+					if (e.getKey() == e.ENTER) {
+						doLogin();
+					}
+				}
+			}
+        },
+        {
+            fieldLabel:'Пароль',
+            name:'loginPassword',
+            inputType:'password',
+			emptyText: 'пароль',
+            allowBlank:false,
+			width: WidthIf(380,10),
+            value:''
+			,listeners: {
+				specialkey: function(field, e){
+					if (e.getKey() == e.ENTER) {
+						doLogin();
+					}
+				}
+			}
+        }
+		]
+		}
+		
+    ]
+});
+
+
 regPanel = new Ext.FormPanel(
 {
 	labelWidth:100,
     url:rootURL+'index.php/app/register',
     frame: true,
-	region:'east',
+	//region:'center',
+	x:5,
+	y:240,
     title: 'Регистрация',
     bodyPadding: 10,
-    scrollable:true,
-    width:320,
+    scrollable:false,
+    width: WidthIf(400,30),
+	height:630,
+
 
     fieldDefaults: {
-        labelAlign: 'right',
+        labelAlign: 'top',
         labelWidth: 115,
         msgTarget: 'side'
     },
 
-    items: [{
+    items: [
+	{
+		scale:'large',
+		xtype:'button',	
+        text: 'Регистрация',
+        iconCls: 'icon-user_add',
+        // Function that fires when user clicks the button
+        handler:doRegister
+    },
+	{
         xtype: 'fieldset',
         title: 'Информация для входа',
         defaultType: 'textfield',
         defaults: {
-            anchor: '100%'
+           // anchor: '100%'
         },
 
         items: [
-            { allowBlank:false, fieldLabel: 'Пользователь', name: 'user', emptyText: 'пользователь' },
-            { allowBlank:false, fieldLabel: 'Пароль', name: 'pass', emptyText: 'пароль', inputType: 'password' },
-            { allowBlank:false, fieldLabel: 'Подтверждение пароля', name: 'pass2', emptyText: 'пароль', inputType: 'password' }
+            { allowBlank:false, fieldLabel: 'Пользователь', name: 'user', emptyText: 'пользователь',  width: WidthIf(380,10) },
+            { allowBlank:false, fieldLabel: 'Пароль', name: 'pass', emptyText: 'пароль', inputType: 'password' ,  width: WidthIf(380,10)},
+            { allowBlank:false, fieldLabel: 'Подтверждение пароля', name: 'pass2', emptyText: 'пароль', inputType: 'password' ,  width: WidthIf(380,10)}
         ]
     }, {
         xtype: 'fieldset',
@@ -99,7 +192,7 @@ regPanel = new Ext.FormPanel(
 
         defaultType: 'textfield',
         defaults: {
-            anchor: '100%'
+           // anchor: '100%'
         },
 
         items: [{allowBlank:false,
@@ -119,107 +212,31 @@ regPanel = new Ext.FormPanel(
             name: 'email',
             vtype: 'email',
 			 emptyText: 'e-mail'
-        }]
-    }],
-
-    buttons: [{
-        text: 'Регистрация',
-       iconCls: 'icon-user_add',
-        //formBind:true,
-        // Function that fires when user clicks the button
-        handler:doRegister
-    }]
-});
-
-login = new Ext.FormPanel({
-	
-    labelWidth:100,
-    url:rootURL+'index.php/app/login',
-    frame:true,
-	//height:'100%',
-	 bodyPadding: 10,
-	fit:1,
-	width:250,
-    title:'Вход',
-    defaultType:'textfield',
-	region:'center',
-    monitorValid:true,
-    // Specific attributes for the text fields for username / password.
-    // The "name" attribute defines the name of variables sent to the server.
-    items:[
-		{
-        xtype: 'fieldset',
-        title: 'Параметры для входа',
-
-        defaultType: 'textfield',
-        defaults: {
-            anchor: '100%'
-        },
-		items: [
-        {
-            fieldLabel:'Пользователь',
-            name:'loginUsername',
-			emptyText: 'пользователь',
-            allowBlank:false,
-            value:''
-			,listeners: {
-				specialkey: function(field, e){
-					if (e.getKey() == e.ENTER) {
-						doLogin();
-					}
-				}
-			}
-        },
-        {
-            fieldLabel:'Пароль',
-            name:'loginPassword',
-            inputType:'password',
-			emptyText: 'пароль',
-            allowBlank:false,
-            value:''
-			,listeners: {
-				specialkey: function(field, e){
-					if (e.getKey() == e.ENTER) {
-						doLogin();
-					}
-				}
-			}
-        }
+        } 
 		]
-		}
-    ],
-    // All the magic happens after the user clicks the button
-    buttons:[
-        {
-            text:'Войти',
-			iconCls: 'icon-key_go',
-            //formBind:true,
-            // Function that fires when user clicks the button
-            handler:doLogin
-        }
-    ]
+    }
 	
-
-
+	]
 });
 
 
 // This just creates a window to wrap the login form.
 // The login object is passed to the items collection.
 var login_win = new Ext.Window({
-    title:'AREAL SMS NOTIFIER. Добро пожаловать!',
+    title:TextIf('AREAL SMS NOTIFIER. Добро пожаловать!','SMS NOTIFIER'),
 	itemId:'login_win',
-	layout: 'border',
-    width: 640,
-    height: 420,
-
-	constrainHeader:true,
-
+	layout: 'absolute',
+    width: WidthIf(470),
+    height: 920,
+	y:0,
+	x:(WidthIf(3000)-WidthIf(470))/2,
+	constrainHeader:true, //AllowConstraint(),
     closable:false,
     modal:true,
-    resizable:true,
+    resizable:false,
     plain:true,
     border:true,
+	//autoScroll:true,
     items:[login,regPanel]
 });
 

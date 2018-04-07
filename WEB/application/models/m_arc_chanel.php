@@ -4,7 +4,7 @@ class  M_arc_chanel extends CI_Model {
     function getRow($empId) {
     $result = array('success' => false, 'msg' => 'No Row ID for retrive data');
 	if (!empty($empId)){
-	    $res = $this->jservice->get(array('Action' => 'GetRowData','FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid', 'PartName' => 'arc_chanel', 'ID' =>  $empId 	));
+	    $res = $this->jservice->get(array('Action' => 'GetRowData','FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid,chanelname,chanelcomment', 'PartName' => 'arc_chanel', 'ID' =>  $empId 	));
 	    if (!empty($res)) {
 	        $result = $res[0];
 	    }
@@ -49,7 +49,7 @@ class  M_arc_chanel extends CI_Model {
     }
     function getRows($sort=array())
 		{
-	    $res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid', 'ViewName' => 'arc_chanel'));
+	    $res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid,chanelname,chanelcomment', 'ViewName' => 'arc_chanel'));
 	    if (count($res)) {
 	        return $res;
 	    } else {
@@ -58,7 +58,7 @@ class  M_arc_chanel extends CI_Model {
 		}
     function getRowsByInstance($id,$sort=array())
 		{
-	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid', 'ViewName' => 'arc_chanel', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
+	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid,chanelname,chanelcomment', 'ViewName' => 'arc_chanel', 'WhereClause' => 'instanceid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
 	    return array();
 	} else {
@@ -67,7 +67,7 @@ class  M_arc_chanel extends CI_Model {
 		}
     function getRowsByParent($id,$sort=array())
 	{
-	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid', 'ViewName' => 'arc_chanel', 'WhereClause' => ' parentstructrowid=G2B(\''. $id . '\')'));
+	$res = $this->jservice->get(array('Action' => 'GetViewData','Sort'=>$sort,'FieldList'=>'B2G(arc_chanelid) as arc_chanelid, B2G(arc_chanelid) as id,B2G(parentstructrowid) as parentid, arc_chanel_BRIEF_F(arc_chanelid , NULL) as  brief,B2G(ch_taype) ch_taype, armd_chaneltype_BRIEF_F(ch_taype, NULL) as ch_taype_grid,ch_param,ch_on, case ch_on  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as ch_on_grid,msg_crash, case msg_crash  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_crash_grid,msg_current, case msg_current  when -1 then \'Да\' when 0 then \'Нет\' else \'\'  end   as msg_current_grid,chanelname,chanelcomment', 'ViewName' => 'arc_chanel', 'WhereClause' => ' parentstructrowid=G2B(\''. $id . '\')'));
 	if (count($res) == 0) {
 	    return array();
 	} else {

@@ -23,7 +23,7 @@
       if(!$sort || $group == $sort) 
           {
               $sort = json_decode($sort);
-              //$sort[] = array('property'=>'field_name', 'direction'=>'ASC');
+              $sort[] = array('property'=>'arsms_data_smstime', 'direction'=>'DESC');
               $sort = json_encode($sort);
           }
           $filter = $this->input->get('filter', FALSE);

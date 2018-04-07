@@ -18,57 +18,46 @@ Ext.define('grid_autoarsms_data', {
         store: store_v_autoarsms_data,
         features: [groupingFeature_autoarsms_data],
         defaultDockWeights : { top: 7, bottom: 5, left: 1, right: 3 },
-        // viewConfig: {               enableTextSelection: true        },
+		default_filter:[{key:'clientid',value:app_info.getAt(0).get("clientid")}],
+      	width:WidthIf(600),
+		minWidth:WidthIf(600),
+		height:HeightIf(450,120),
         dockedItems: [{
                 xtype:  'toolbar',
-                     items: [{
-                    iconCls:  'icon-application_form_add',
-                    text:   'Создать',
-                    scope:  this,
-                    handler : this.onAddClick
-                    }, {
-                    iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
-                    itemId:  'edit',
-                    disabled: true,
-                    scope:  this,
-                    handler : this.onEditClick
-                    }, {
-                    iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
-                    disabled: true,
-                    itemId:  'delete',
-                    scope:  this,
-                    handler : this.onDeleteClick
-                    }, {
+                     items: [
+
+                   {
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : this.onRefreshClick
                    } , {
                     iconCls:  'icon-page_excel',
-                    text:   'Экспорт',
+                    text:   TextIf('Экспорт'),
                     itemId:  'bExport',
                     scope:  this,
                     handler: this.onExportClick
                 }]
             }],
         columns: [
-            {text: "Дата и Время СМС", width:133, dataIndex: 'arsms_data_smstime', sortable: true,renderer:myDateRenderer}
+            {text: "Дата и Время СМС", width:WidthIf4(160), dataIndex: 'arsms_data_smstime', sortable: true,renderer:myDateRenderer}
             ,
-            {text: "Серийный номер", width:133, dataIndex: 'arsms_data_serialno', sortable: true}
+            {text: "Серийный номер", width:WidthIf4(133), dataIndex: 'arsms_data_serialno', sortable: true}
             ,
-            {text: "Температура", width:133, dataIndex: 'arsms_data_temperature', sortable: true}
+            {text: "Температура", width:WidthIf4(133), dataIndex: 'arsms_data_temperature', sortable: true}
             ,
-            {text: "Поплавок-норма", width:133, dataIndex: 'arsms_data_pop_ok', sortable: true}
+            {text: "Поплавок-норма", width:WidthIf4(133), dataIndex: 'arsms_data_pop_ok', sortable: true}
             ,
-            {text: "Крышка открыта", width:133, dataIndex: 'arsms_data_roof_open', sortable: true}
+            {text: "Крышка открыта", width:WidthIf4(133), dataIndex: 'arsms_data_roof_open', sortable: true}
             ,
-            {text: "Питание в норме", width:133, dataIndex: 'arsms_data_power_ok', sortable: true}
+            {text: "Питание в норме", width:WidthIf4(133), dataIndex: 'arsms_data_power_ok', sortable: true}
+			 ,
+            {text: "Тип смс", width:WidthIf4(133), dataIndex: 'arsms_data_opercode', sortable: true,renderer: function(value, record){if(value==1) return "Перезапуск"; if(value==2) return "Сенсор"; if(value==4) return "По звонку";  return "?";}}
         ]
         ,
         bbar: Ext.create('Ext.PagingToolbar', {
+		height:HeightIf(40),
         store: store_v_autoarsms_data,
         displayInfo: true,
         displayMsg:  'Показаны строки с {0} по {1} из {2}',
@@ -88,8 +77,8 @@ Ext.define('grid_autoarsms_data', {
 					animCollapse: false, 
 					titleCollapse:true,
 					bodyPadding:5,
-					width:200,
-					minWidth:200,
+					width:WidthIf3(200),
+					minWidth:WidthIf3(200),
 					autoScroll:true,
                     buttonAlign:  'center',
 					layout: {
@@ -315,15 +304,29 @@ listeners: {render: function(e) {Ext.QuickTips.register({  target: e.getEl(), te
         );
         this.callParent();
         this.getSelectionModel().on('selectionchange', this.onSelectChange, this);
-        this.store.load()
+		
+		if(this.default_filter!=null){
+			var filters = new Array();
+			for (var i=0; i< this.default_filter.length;i++) {
+				var kv=this.default_filter[i];
+				filters.push({property: kv.key, value: kv.value});
+			}
+		}
+		
+		if (filters.length>0) 
+			this.store.filter(filters); 
+		else 
+		   this.store.load();
+		
+        
        },
         onSelectChange: function(selModel, selections){
-        this.down('#delete').setDisabled(selections.length === 0);
-        this.down('#edit').setDisabled(selections.length === 0);
+        //this.down('#delete').setDisabled(selections.length === 0);
+        //this.down('#edit').setDisabled(selections.length === 0);
     },
     listeners: {
         itemdblclick: function() { 
-    	    this.onEditClick();
+    	    //this.onEditClick();
         }
         ,
         	added:function(){
@@ -469,11 +472,11 @@ function arsms_Jrnl(){
 }
 Ext.define('ObjectWindow_arsms', {
     extend:  'Ext.window.Window',
-    maxHeight: 620,
-    minHeight: 620,
-    minWidth: 800,
-    maxWidth: 1024,
-    constrainHeader :true,
+    maxHeight: HeightIf(2000,50),
+    minHeight: HeightIf(620,50),
+    minWidth: WidthIf(800),
+    maxWidth: WidthIf4(1024),
+    constrainHeader :AllowConstraint(),
     layout:  'fit',
     autoShow: true,
     closeAction: 'destroy',

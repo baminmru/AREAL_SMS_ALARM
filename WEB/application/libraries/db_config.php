@@ -8,7 +8,7 @@ $dconfig = array();
 $dconfig['db']['server'] = 'localhost';
 $dconfig['db']['database'] = 'areal_cli';
 $dconfig['db']['username'] = 'root';
-$dconfig['db']['password'] = '';
+$dconfig['db']['password'] = 'root';
 
 // полный путь к каталогу файлового хранилища
 $dconfig['storage'] = 'D:/bami/projects/SMS_alarm/WEB/files';

@@ -90,7 +90,7 @@ showGroupsText:  'Показать группировку'
          {
         itemId:  id,
         store:  mystore,
-        width:600,
+        width:WidthIf(600),
         header:false,
         layout:'fit',
         scroll:'both',
@@ -104,46 +104,50 @@ showGroupsText:  'Показать группировку'
                 xtype:  'toolbar',
                 items: [
                 {
+                    scale: 'large',
                     iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                    text:   TextIf('Создать'),
                     scope:  this,
                     handler : onAddClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     scope:  this,
                     disabled: true,
                     itemId:  'edit',
                     handler : onEditClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                     handler : onDeleteClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : onRefreshClick
                 }]
             }],
         columns: [
-{text: "Модель", width:200, dataIndex: 'moduletype_grid', sortable: true}
+{text: "Модель", width:WidthIf4(200), dataIndex: 'moduletype_grid', sortable: true}
             ,
-{text: "Серийный номер", width: 200, dataIndex: 'serialno', sortable: true}
+{text: "Серийный номер", width: WidthIf4(200), dataIndex: 'serialno', sortable: true}
             ,
-{text: "Дата изготовления", width:90, dataIndex: 'makedate', sortable: true, xtype: 'datecolumn',   renderer:myDateOnlyRenderer }
+{text: "Дата изготовления", width:WidthIf4(90), dataIndex: 'makedate', sortable: true, xtype: 'datecolumn',   renderer:myDateOnlyRenderer }
             ,
-{text: "Номер телефона", width: 200, dataIndex: 'phone', sortable: true}
+{text: "Номер телефона", width: WidthIf4(200), dataIndex: 'phone', sortable: true}
             ,
-{text: "Крышка NO", width:80, dataIndex: 'roof_no_grid', sortable: true}
+{text: "Крышка NO", width:WidthIf4(80), dataIndex: 'roof_no_grid', sortable: true}
             ,
-{text: "Поплавок NO", width:80, dataIndex: 'pop_no_grid', sortable: true}
+{text: "Поплавок NO", width:WidthIf4(80), dataIndex: 'pop_no_grid', sortable: true}
             ,
-{text: "Питание NO", width:80, dataIndex: 'power_no_grid', sortable: true}
+{text: "Питание NO", width:WidthIf4(80), dataIndex: 'power_no_grid', sortable: true}
         ]
        ,
     listeners: {
@@ -199,8 +203,8 @@ initComponent: function(){
         border:false, 
         items: [
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -228,12 +232,12 @@ itemId:   'moduletype_grid',
 fieldLabel:  'Модель',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 55, 
@@ -245,12 +249,12 @@ itemId:   'serialno',
 fieldLabel:  'Серийный номер',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 110, 
@@ -264,12 +268,12 @@ itemId:   'makedate',
 fieldLabel:  'Дата изготовления',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 165, 
@@ -281,9 +285,9 @@ itemId:   'phone',
 fieldLabel:  'Номер телефона',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
-       ], width: 770,
+       ], width: WidthIf(770,10),
        height: 240 
         }
 ,
@@ -299,9 +303,9 @@ allowBlank:false
         x: 0, 
             items: [
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 0, 
 
@@ -333,13 +337,13 @@ itemId:   'roof_no_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('roof_no', record.get('value'));}  },
 fieldLabel:  'Крышка NO',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth:WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 55, 
 
@@ -371,13 +375,13 @@ itemId:   'pop_no_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('pop_no', record.get('value'));}  },
 fieldLabel:  'Поплавок NO',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth:WidthIf(120,10)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
-        maxWidth: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 110, 
 
@@ -409,9 +413,9 @@ itemId:   'power_no_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('power_no', record.get('value'));}  },
 fieldLabel:  'Питание NO',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth:WidthIf(120,10)
 }
-       ], width: 760,
+       ], width: WidthIf(760),
        height: 235 
         } //group
           ],//items = part panel
@@ -421,6 +425,7 @@ allowBlank:true
             dock:   'bottom',
             ui:     'footer',
                 items: ['->', {
+                    scale: 'large',
                     iconCls:  'icon-accept',
                     itemId:  'save',
                     text:   'Сохранить',
@@ -429,6 +434,7 @@ allowBlank:true
                     handler : this.onSave
                 }
                , {
+                    scale: 'large',
                     iconCls:  'icon-cancel',
                     text:   'Закрыть',
                     scope:  this,
@@ -518,11 +524,11 @@ Ext.define('EditWindow_armd_infoadm', {
     maxHeight: 625,
     maxWidth: 900,
     autoScroll:true,
-    minWidth: 750,
-    width: 800,
+    minWidth: WidthIf(750),
+    width:  WidthIf(800),
     minHeight:575,
     height:585,
-    constrainHeader :true,
+    constrainHeader :AllowConstraint(),
     layout:  'absolute',
     autoShow: true,
     modal: true,

@@ -90,7 +90,7 @@ showGroupsText:  'Показать группировку'
          {
         itemId:  id,
         store:  mystore,
-        width:600,
+        width:WidthIf(600), 
         header:false,
         layout:'fit',
         scroll:'both',
@@ -104,34 +104,38 @@ showGroupsText:  'Показать группировку'
                 xtype:  'toolbar',
                 items: [
                 {
+                    scale: 'large',
                     iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                    text:   TextIf('Создать'),
                     scope:  this,
                     handler : onAddClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     scope:  this,
                     disabled: true,
                     itemId:  'edit',
                     handler : onEditClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                     handler : onDeleteClick
                     }, {
+                    scale: 'large',
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : onRefreshClick
                 }]
             }],
         columns: [
-{text: "Название канала", width: 200, dataIndex: 'name', sortable: true}
+{text: "Название канала", width: WidthIf4(200), dataIndex: 'name', sortable: true}
         ]
        ,
     listeners: {
@@ -186,8 +190,8 @@ initComponent: function(){
         border:false, 
         items: [
 {
-        minWidth: 740,
-        width: 740,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -199,9 +203,9 @@ itemId:   'name',
 fieldLabel:  'Название канала',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(120,10)
 }
-       ], width: 770,
+       ], width: WidthIf(770,10),
        height: 75 
         }
           ],//items = part panel
@@ -211,6 +215,7 @@ allowBlank:false
             dock:   'bottom',
             ui:     'footer',
                 items: ['->', {
+                    scale: 'large',
                     iconCls:  'icon-accept',
                     itemId:  'save',
                     text:   'Сохранить',
@@ -219,6 +224,7 @@ allowBlank:false
                     handler : this.onSave
                 }
                , {
+                    scale: 'large',
                     iconCls:  'icon-cancel',
                     text:   'Закрыть',
                     scope:  this,
@@ -302,11 +308,11 @@ Ext.define('EditWindow_armd_chaneltype', {
     maxHeight: 215,
     maxWidth: 900,
     autoScroll:true,
-    minWidth: 750,
-    width: 800,
+    minWidth: WidthIf(750),
+    width: WidthIf(800),
     minHeight:165,
     height:175,
-    constrainHeader :true,
+    constrainHeader :AllowConstraint(),
     layout:  'absolute',
     autoShow: true,
     modal: true,

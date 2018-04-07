@@ -19,10 +19,10 @@
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
 			<meta name="description" content="" />
 			<title>AREAL СМС</title>
-			<script type="text/javascript" src="/e6/ext-all.js"></script> 
+			<script type="text/javascript" src="/e6/ext-all-debug.js"></script> 
 
 			<script type="text/javascript" src="resources/exporter/Base64.js"></script>
 			<script type="text/javascript" src="resources/exporter/Cell.js"></script>
@@ -113,10 +113,10 @@
 	<head>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 			<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
 			<meta name="description" content="" />
 			<title>AREAL СМС</title>
-			<script type="text/javascript" src="/e6/ext-all.js"></script> 
+			<script type="text/javascript" src="/e6/ext-all-debug.js"></script> 
 			
 
 			<script type="text/javascript" src="resources/exporter/Base64.js"></script>
@@ -166,7 +166,10 @@
 			<script type="text/javascript" src="/e6/locale/locale-ru.js"></script>
 				
 			   
-			   <script type ="text/javascript" > var rootURL="" ;  </script>
+		
+	</head>
+	<body>
+		   <script type ="text/javascript" > var rootURL="" ;  </script>
 			   
 			   
 			   
@@ -178,9 +181,7 @@
 					height: 100%;
 				}
 		  </style>
-	</head>
-	<body>
-		<link rel="stylesheet" type="text/css" href="resources/css/icons.css"/>
+		  <link rel="stylesheet" type="text/css" href="resources/css/icons.css"/>
 		<script type="text/javascript" src="resources/common.js"></script>
 		<script type="text/javascript" src="resources/app.js"></script>
 		

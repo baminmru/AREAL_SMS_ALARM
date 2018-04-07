@@ -153,9 +153,9 @@ var grid_arc_chanel;
                 }]
             }],
         columns: [
-{text: "Тип канала", width: 200, dataIndex: 'ch_taype_grid', sortable: true}
+{text: "Тип канала", width: WidthIf4(200), dataIndex: 'ch_taype_grid', sortable: true}
             ,
-{text: "Параметры канала", width: 200, dataIndex: 'ch_param', sortable: true}
+{text: "Параметры канала", width: WidthIf4(200), dataIndex: 'ch_param', sortable: true}
             ,
 {text: "Канал включен", width:80, dataIndex: 'ch_on_grid', sortable: true}
             ,
@@ -301,56 +301,55 @@ var p1;
         instanceid: '',
         scroll:'both',
         autoScroll:true,
-        width:600,
+        width:WidthIf(600), 
         features: [groupingFeature_arc_md],
           dockedItems: [{
                 xtype:  'toolbar',
                 items: [
-                {
-                    iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                {iconCls:  'icon-application_form_add',
+                    text:   TextIf('Создать'),
                     scope:  this,
                     handler : onAddClick
                     }, {
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     scope:  this,
                     disabled: true,
                     itemId:  'edit',
                     handler : onEditClick
                     }, {
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                     handler : onDeleteClick
-                    }, {
-                    iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
-                    itemId:  'bRefresh',
-                    scope:  this,
-                    handler : onRefreshClick
-                },{
+                    },{
 					iconCls:  'icon-bell',
-                    text:   'Вызов',
+                    text:   TextIf('Вызов'),
                     disabled: true,
                     itemId:  'vcall',
                     scope:  this,
                     handler : onVcallClick
+                    }, {
+                    iconCls:  'icon-table_refresh',
+                    text:   TextIf('Обновить'),
+                    itemId:  'bRefresh',
+                    scope:  this,
+                    handler : onRefreshClick
                     }
 				]
             }],
         columns: [
-{text: "Серийный номер модуля", width: 200, dataIndex: 'moduleserial', sortable: true }
+{text: "Серийный номер модуля", width: WidthIf4(200), dataIndex: 'moduleserial', sortable: true }
             ,
-{text: "Название", width: 200, dataIndex: 'name', sortable: true }
+{text: "Название", width: WidthIf4(200), dataIndex: 'name', sortable: true }
             ,
-{text: "Тип оборудование", width: 200, dataIndex: 'deivetype', sortable: true }
+{text: "Тип оборудование", width: WidthIf4(200), dataIndex: 'deivetype', sortable: true }
             ,
-{text: "Адрес", width: 200, dataIndex: 'theaddress', sortable: true }
+{text: "Адрес", width: WidthIf4(200), dataIndex: 'theaddress', sortable: true }
             ,
-{text: "Ответственное лицо", width: 200, dataIndex: 'master_fio', sortable: true }
+{text: "Ответственное лицо", width: WidthIf4(200), dataIndex: 'master_fio', sortable: true }
             ,
 {text: "Крышка NO", width:60, dataIndex: 'roof_no_grid', sortable: true}
             ,
@@ -429,8 +428,8 @@ fieldLabel:  'Модуль'
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -442,12 +441,12 @@ itemId:   'moduleserial',
 fieldLabel:  'Серийный номер модуля',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 55, 
@@ -459,12 +458,12 @@ itemId:   'name',
 fieldLabel:  'Название',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 110, 
@@ -475,12 +474,12 @@ name:   'deivetype',
 itemId:   'deivetype',
 fieldLabel:  'Тип оборудование',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 165, 
@@ -491,12 +490,12 @@ name:   'theaddress',
 itemId:   'theaddress',
 fieldLabel:  'Адрес',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 220, 
@@ -507,9 +506,9 @@ name:   'master_fio',
 itemId:   'master_fio',
 fieldLabel:  'Ответственное лицо',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
-       ], width: 770,
+       ], width: WidthIf(770),
        height: 295 
         }
 ,
@@ -525,8 +524,8 @@ allowBlank:true
         x: 0, 
             items: [
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -559,12 +558,12 @@ itemId:   'roof_no_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('roof_no', record.get('value'));}  },
 fieldLabel:  'Крышка NO',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 55, 
@@ -597,12 +596,12 @@ itemId:   'pop_no_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('pop_no', record.get('value'));}  },
 fieldLabel:  'Поплавок NO',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 110, 
@@ -635,9 +634,9 @@ itemId:   'power_no_grid',
 listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).activeRecord.set('power_no', record.get('value'));}  },
 fieldLabel:  'Питание NO',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
-       ], width: 760,
+       ], width: WidthIf(760),
        height: 235 
         } //group
           ],//items = part panel
@@ -746,11 +745,11 @@ Ext.define('EditWindow_arc_md', {
     maxHeight: 680,
     maxWidth: 900,
     autoScroll:true,
-    minWidth: 750,
-    width: 800,
+    minWidth: WidthIf(750),
+    width: WidthIf(800),
     minHeight:630,
     height:640,
-    constrainHeader :true,
+    constrainHeader :AllowConstraint(),
     layout:  'absolute',
     autoShow: true,
     modal: true,
@@ -787,8 +786,8 @@ initComponent: function(){
         border:false, 
         items: [
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -816,12 +815,12 @@ itemId:   'ch_taype_grid',
 fieldLabel:  'Тип канала',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 55, 
@@ -833,12 +832,12 @@ itemId:   'ch_param',
 fieldLabel:  'Параметры канала',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 110, 
@@ -857,9 +856,9 @@ listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).active
 fieldLabel:  'Канал включен',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
-       ], width: 770,
+       ], width: WidthIf(770),
        height: 185 
         }
 ,
@@ -875,8 +874,8 @@ allowBlank:false
         x: 0, 
             items: [
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 0, 
@@ -895,12 +894,12 @@ listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).active
 fieldLabel:  'Авария',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
 ,
 {
-        minWidth: 740,
-        width: 740,
+        minWidth:WidthIf(240,10),
+        width: WidthIf(740,10),
         maxWidth: 740,
         x: 5, 
         y: 55, 
@@ -919,9 +918,9 @@ listeners:{  select: function ( combo, record, eOpts ) {combo.up('form' ).active
 fieldLabel:  'Дежурные',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf2(120)
 }
-       ], width: 760,
+       ], width: WidthIf(760),
        height: 180 
         } //group
           ],//items = part panel
@@ -1028,11 +1027,11 @@ Ext.define('EditWindow_arc_chanel', {
     maxHeight: 515,
     maxWidth: 900,
     autoScroll:true,
-    minWidth: 750,
-    width: 800,
+    minWidth: WidthIf(750),
+    width: WidthIf(800),
     minHeight:465,
     height:475,
-    constrainHeader :true,
+    constrainHeader :AllowConstraint(),
     layout:  'absolute',
     autoShow: true,
     modal: true,

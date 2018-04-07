@@ -66,8 +66,8 @@ function arc_Panel_main(objectID, RootPanel, selection){
      arc_main= Ext.create('Ext.form.Panel', {
       id: 'arc',
       layout:'fit',
-      width:810, // для правильного расчета размера дочерних окон ! 
-      height:530,
+      width:WidthIf(810),  // для правильного расчета размера дочерних окон ! 
+      height:450,
       fieldDefaults: {
           labelAlign:             'top',
           msgTarget:              'side'
@@ -130,12 +130,13 @@ int_arc_md_main
 			{		
 				xtype:'button',
 				id: int_arc_info_main.id+'_buttonOk',
-				iconCls:  'icon-accept',					
+				iconCls:  'icon-accept',
+				scale:'large',	
 				text: 'Сохранить',					
 				disabled: false,
 				hidden: false,			
-				x:800,
-				y:5,	
+				x:5,
+				y:380,	
 				handler: arc_main.onButtonOk
 				
 			}

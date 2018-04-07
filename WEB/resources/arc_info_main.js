@@ -68,7 +68,8 @@ var p1_valid=false;
                         }
                      });
                    }
-                    if (close_after_save) { if (typeof(callaftersave) == 'function') callaftersave();  p1.up('window').close(); }
+				    if (typeof(callaftersave) == 'function') callaftersave();
+                    if (close_after_save) {   p1.up('window').close(); }
                 }
               }
             });
@@ -95,7 +96,7 @@ p1=new Ext.form.Panel(
             activeRecord: null,
             selection: selection,
             defaultType:  'textfield',
-            doSave: onSave2,
+            doSave: onSave1,
             canClose: function(){
             	if( p1_valid){
             		if(! p1.getForm().isValid()  ) return true;
@@ -107,8 +108,8 @@ p1=new Ext.form.Panel(
             	}
             },
         fieldDefaults: {
-         labelAlign:  'right',
-         labelWidth: 110
+         labelAlign:  'top',
+         labelWidth: WidthIf(140)
         },
         items: [
         { 
@@ -120,12 +121,12 @@ p1=new Ext.form.Panel(
         layout:'absolute', 
         items: [
 {
-        minWidth: 365,
-        width: 365,
-        maxWidth: 365,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
         y: 5, 
-labelWidth:140,
+labelWidth:WidthIf(150,10),
 
 xtype:  'textfield',
 value:  '',
@@ -137,12 +138,12 @@ allowBlank:false
 }
 ,
 {
-        minWidth: 365,
-        width: 365,
-        maxWidth: 365,
-        x: 375, 
-        y: 5, 
-labelWidth:140,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
+        x: 5, 
+        y: 60, 
+labelWidth:WidthIf(150,10),
 
 xtype:  'textfield',
 value:  '',
@@ -154,12 +155,12 @@ allowBlank:false
 }
 ,
 {
-        minWidth: 365,
-        width: 365,
-        maxWidth: 365,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
-        y: 40, 
-labelWidth:140,
+        y: 115, 
+labelWidth:WidthIf(150,10),
 
 xtype:  'textfield',
 value:  '',
@@ -170,12 +171,12 @@ allowBlank:true
 }
 ,
 {
-        minWidth: 365,
-        width: 365,
-        maxWidth: 365,
-        x: 375, 
-        y: 40, 
-labelWidth:140,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
+        x: 5, 
+        y: 170, 
+labelWidth:WidthIf(150,10),
 
 xtype:  'textfield',
 value:  '',
@@ -186,12 +187,12 @@ allowBlank:true
 }
 ,
 {
-        minWidth: 365,
-        width: 365,
-        maxWidth: 365,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
         x: 5, 
-        y: 75, 
-labelWidth:140,
+        y: 225, 
+labelWidth:WidthIf(150,10),
 
 xtype:  'textfield',
 value:  '',
@@ -202,12 +203,12 @@ allowBlank:true
 }
 ,
 {
-        minWidth: 365,
-        width: 365,
-        maxWidth: 365,
-        x: 375, 
-        y: 75, 
-labelWidth:140,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: WidthIf(740,10),
+        x: 5, 
+        y: 280, 
+labelWidth:WidthIf(150,10),
 
 xtype:  'textfield',
 value:  '',
@@ -225,7 +226,7 @@ name:   'isadmin',
 fieldLabel:  'Администратор'
 }
        ],
-       height: 130 
+       height: 355 
         }
           ],//items = part panel
         instanceid:''
@@ -269,9 +270,9 @@ initComponent: function(){
         border:false, 
         items: [
 {
-        minWidth: 220,
-        width: 220,
-        maxWidth: 220,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: 740,
         x: 5, 
         y: 0, 
 
@@ -282,15 +283,15 @@ itemId:   'family',
 fieldLabel:  'Фамилия',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(150,10)
 }
 ,
 {
-        minWidth: 220,
-        width: 220,
-        maxWidth: 220,
-        x: 255, 
-        y: 0, 
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: 740,
+        x: 5, 
+        y: 55, 
 
 xtype:  'textfield',
 value:  '',
@@ -299,15 +300,15 @@ itemId:   'name',
 fieldLabel:  'Имя',
 labelClsExtra:'x-item-mandatory',
 allowBlank:false
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(150,10)
 }
 ,
 {
-        minWidth: 220,
-        width: 220,
-        maxWidth: 220,
-        x: 505, 
-        y: 0, 
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: 740,
+        x: 5, 
+        y: 110, 
 
 xtype:  'textfield',
 value:  '',
@@ -315,15 +316,15 @@ name:   'org',
 itemId:   'org',
 fieldLabel:  'Организация',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(150,10)
 }
 ,
 {
-        minWidth: 220,
-        width: 220,
-        maxWidth: 220,
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: 740,
         x: 5, 
-        y: 55, 
+        y: 165, 
 
 xtype:  'textfield',
 value:  '',
@@ -331,15 +332,15 @@ name:   'phone',
 itemId:   'phone',
 fieldLabel:  'Телефон',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(150,10)
 }
 ,
 {
-        minWidth: 220,
-        width: 220,
-        maxWidth: 220,
-        x: 255, 
-        y: 55, 
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: 740,
+        x: 5, 
+        y: 220, 
 
 xtype:  'textfield',
 value:  '',
@@ -347,15 +348,15 @@ name:   'email',
 itemId:   'email',
 fieldLabel:  'E-Mail',
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(150,10)
 }
 ,
 {
-        minWidth: 220,
-        width: 220,
-        maxWidth: 220,
-        x: 505, 
-        y: 55, 
+        minWidth: WidthIf(740,10),
+        width: WidthIf(740,10),
+        maxWidth: 740,
+        x: 5, 
+        y: 275, 
 
 xtype:  'textfield',
 value:  '',
@@ -365,7 +366,7 @@ fieldLabel:  'Логин',
 editable: false,
 readOnly: true,
 allowBlank:true
-       ,labelWidth: 120
+       ,labelWidth: WidthIf(150,10)
 }
 ,
 {
@@ -373,8 +374,8 @@ xtype:  'hidden',
 name:   'isadmin',
 fieldLabel:  'Администратор'
 }
-       ], width: 770,
-       height: 130 
+       ], width: WidthIf(770,10),
+       height: 350 
         }
           ],//items = part panel
         instanceid:'',
@@ -383,6 +384,7 @@ fieldLabel:  'Администратор'
             dock:   'bottom',
             ui:     'footer',
                 items: ['->', {
+                    scale: 'large',
                     iconCls:  'icon-accept',
                     itemId:  'save',
                     text:   'Сохранить',
@@ -470,14 +472,14 @@ fieldLabel:  'Администратор'
 
 Ext.define('EditWindow_arc_infomain', {
     extend:  'Ext.window.Window',
-    maxHeight: 270,
+    maxHeight: 490,
     maxWidth: 900,
     autoScroll:true,
-    minWidth: 750,
-    width: 800,
-    minHeight:220,
-    height:230,
-    constrainHeader :true,
+    minWidth: WidthIf(750),
+    width: WidthIf(800),
+    minHeight:440,
+    height:450,
+    constrainHeader :AllowConstraint(),
     layout:  'absolute',
     autoShow: true,
     modal: true,

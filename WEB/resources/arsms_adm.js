@@ -29,7 +29,7 @@ function arsms_Panel_adm(objectID, RootPanel, selection){
      arsms_adm= Ext.create('Ext.form.Panel', {
       id: 'arsms',
       layout:'fit',
-      width:810, // для правильного расчета размера дочерних окон ! 
+      width:WidthIf(810),  // для правильного расчета размера дочерних окон ! 
       height:530,
       fieldDefaults: {
           labelAlign:             'top',

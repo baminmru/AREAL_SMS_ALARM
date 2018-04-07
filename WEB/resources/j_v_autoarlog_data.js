@@ -23,49 +23,49 @@ Ext.define('grid_autoarlog_data', {
                 xtype:  'toolbar',
                      items: [{
                     iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                    text:   TextIf('Создать'),
                     scope:  this,
                     handler : this.onAddClick
                     }, {
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     itemId:  'edit',
                     disabled: true,
                     scope:  this,
                     handler : this.onEditClick
                     }, {
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                     handler : this.onDeleteClick
                     }, {
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : this.onRefreshClick
                    } , {
                     iconCls:  'icon-page_excel',
-                    text:   'Экспорт',
+                    text:   TextIf('Экспорт'),
                     itemId:  'bExport',
                     scope:  this,
                     handler: this.onExportClick
                 }]
             }],
         columns: [
-            {text: "СМС", width:133, dataIndex: 'arlog_data_sms', sortable: true}
+            {text: "СМС", width:WidthIf4(133), dataIndex: 'arlog_data_sms', sortable: true}
             ,
-            {text: "Канал", width:133, dataIndex: 'arlog_data_chanel', sortable: true}
+            {text: "Канал", width:WidthIf4(133), dataIndex: 'arlog_data_chanel', sortable: true}
             ,
-            {text: "Время отсылки", width:133, dataIndex: 'arlog_data_sendtime', sortable: true,renderer:myDateRenderer}
+            {text: "Время отсылки", width:WidthIf4(133), dataIndex: 'arlog_data_sendtime', sortable: true,renderer:myDateRenderer}
             ,
-            {text: "Результат", width:133, dataIndex: 'arlog_data_sendresult', sortable: true}
+            {text: "Результат", width:WidthIf4(133), dataIndex: 'arlog_data_sendresult', sortable: true}
             ,
-            {text: "Номер попытки", width:133, dataIndex: 'arlog_data_trynumber', sortable: true}
+            {text: "Номер попытки", width:WidthIf4(133), dataIndex: 'arlog_data_trynumber', sortable: true}
             ,
-            {text: "завершено", width:133, dataIndex: 'arlog_data_finished', sortable: true}
+            {text: "завершено", width:WidthIf4(133), dataIndex: 'arlog_data_finished', sortable: true}
         ]
         ,
         bbar: Ext.create('Ext.PagingToolbar', {
@@ -88,8 +88,8 @@ Ext.define('grid_autoarlog_data', {
 					animCollapse: false, 
 					titleCollapse:true,
 					bodyPadding:5,
-					width:200,
-					minWidth:200,
+					width:WidthIf3(200),
+					minWidth:WidthIf3(200),
 					autoScroll:true,
                     buttonAlign:  'center',
 					layout: {
@@ -473,9 +473,9 @@ Ext.define('ObjectWindow_arlog', {
     extend:  'Ext.window.Window',
     maxHeight: 620,
     minHeight: 620,
-    minWidth: 800,
-    maxWidth: 1024,
-    constrainHeader :true,
+    minWidth: WidthIf(800),
+    maxWidth: WidthIf4(1024),
+    constrainHeader :AllowConstraint(),
     layout:  'fit',
     autoShow: true,
     closeAction: 'destroy',

@@ -63,15 +63,11 @@ function arc_Panel_(objectID, RootPanel, selection){
           DefineForms_arc_md_();
      var   int_arc_info_     =      DefineInterface_arc_info_('int_arc_info',store_arc_info, selection);
      var   int_arc_md_     =      DefineInterface_arc_md_('int_arc_md',store_arc_md);
-	 
-	 
-	 
-	 
      arc_= Ext.create('Ext.form.Panel', {
       id: 'arc',
       layout:'fit',
-      width:810, // для правильного расчета размера дочерних окон ! 
-      height:530,
+      width:WidthIf(810),  // для правильного расчета размера дочерних окон ! 
+      height:470,
       fieldDefaults: {
           labelAlign:             'top',
           msgTarget:              'side'
@@ -139,8 +135,8 @@ int_arc_md_
 				text: 'Сохранить',					
 				disabled: false,
 				hidden: false,			
-				x:800,
-				y:5,	
+				x:5,
+				y:380,	
 				handler: arc_.onButtonOk
 				
 			}

@@ -307,6 +307,29 @@ class App extends CI_Controller
 		}
     }
 	
+	function AdminPassword() {
+		 log_message('debug', 'setPassword post : '.json_encode($this->input->post(NULL, FALSE)));
+		 log_message('debug', 'setPassword get : '.json_encode($this->input->get(NULL, FALSE)));
+		 $data = array(
+			'instanceid' =>   $this->input->get_post('instanceid', TRUE),
+			'newpassword' =>   $this->input->get_post('newpassword', TRUE),
+			'comppassword' =>   $this->input->get_post('comppassword', TRUE)
+		 );
+       
+		if (!empty($data)) {
+			$res=$this->jservice->get(array('Action' => 'Wizard', 'Name' => 'setpassword_wiz', 'Values'=>$data ));
+			
+			if($res[0]->result=='OK'){
+				echo( json_encode(array('success' => TRUE, 'msg' => $res[0]->result)));
+			}else{
+				echo( json_encode(array('success' => FALSE, 'msg' => $res[0]->result)));
+			}
+			
+		} else {
+			echo(json_encode(array('success' => FALSE, 'msg' => 'No data to store on server')));
+		}
+    }
+	
 	
 	 public function logout()
     {

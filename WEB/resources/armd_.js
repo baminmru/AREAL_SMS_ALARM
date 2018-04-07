@@ -71,7 +71,7 @@ function armd_Panel_(objectID, RootPanel, selection){
      armd_= Ext.create('Ext.form.Panel', {
       id: 'armd',
       layout:'fit',
-      width:810, // для правильного расчета размера дочерних окон ! 
+      width:WidthIf(810),  // для правильного расчета размера дочерних окон ! 
       height:530,
       fieldDefaults: {
           labelAlign:             'top',

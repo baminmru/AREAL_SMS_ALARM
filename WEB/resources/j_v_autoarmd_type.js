@@ -23,39 +23,39 @@ Ext.define('grid_autoarmd_type', {
                 xtype:  'toolbar',
                      items: [{
                     iconCls:  'icon-application_form_add',
-                    text:   'Создать',
+                    text:   TextIf('Создать'),
                     scope:  this,
                     handler : this.onAddClick
                     }, {
                     iconCls:  'icon-application_form_edit',
-                    text:   'Изменить',
+                    text:   TextIf('Изменить'),
                     itemId:  'edit',
                     disabled: true,
                     scope:  this,
                     handler : this.onEditClick
                     }, {
                     iconCls:  'icon-application_form_delete',
-                    text:   'Удалить',
+                    text:   TextIf('Удалить'),
                     disabled: true,
                     itemId:  'delete',
                     scope:  this,
                     handler : this.onDeleteClick
                     }, {
                     iconCls:  'icon-table_refresh',
-                    text:   'Обновить',
+                    text:   TextIf('Обновить'),
                     itemId:  'bRefresh',
                     scope:  this,
                     handler : this.onRefreshClick
                    } , {
                     iconCls:  'icon-page_excel',
-                    text:   'Экспорт',
+                    text:   TextIf('Экспорт'),
                     itemId:  'bExport',
                     scope:  this,
                     handler: this.onExportClick
                 }]
             }],
         columns: [
-            {text: "Название  типа", width:800, dataIndex: 'armd_type_name', sortable: true}
+            {text: "Название  типа", width:WidthIf4(800), dataIndex: 'armd_type_name', sortable: true}
         ]
         ,
         bbar: Ext.create('Ext.PagingToolbar', {
@@ -78,8 +78,8 @@ Ext.define('grid_autoarmd_type', {
 					animCollapse: false, 
 					titleCollapse:true,
 					bodyPadding:5,
-					width:200,
-					minWidth:200,
+					width:WidthIf3(200),
+					minWidth:WidthIf3(200),
 					autoScroll:true,
                     buttonAlign:  'center',
 					layout: {
@@ -310,9 +310,9 @@ Ext.define('ObjectWindow_armd', {
     extend:  'Ext.window.Window',
     maxHeight: 620,
     minHeight: 620,
-    minWidth: 800,
-    maxWidth: 1024,
-    constrainHeader :true,
+    minWidth: WidthIf(800),
+    maxWidth: WidthIf4(1024),
+    constrainHeader :AllowConstraint(),
     layout:  'fit',
     autoShow: true,
     closeAction: 'destroy',

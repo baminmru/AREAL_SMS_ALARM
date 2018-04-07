@@ -1,8 +1,9 @@
 ﻿
 var actionarc = Ext.create('Ext.Action', {
     itemId:             'actionarc',
-    text:               'Клиент',
+    text:               TextIf('Клиент'),
     iconCls:            'icon-user',
+	scale:'large',
 			 disabled:defaultMenuDisabled,
 			 hidden:defaultMenuHidden,
              handler: function(){
@@ -39,8 +40,9 @@ var actionarlog = Ext.create('Ext.Action', {
 });
 var actionarmd = Ext.create('Ext.Action', {
     itemId:             'actionarmd',
-    text:               'Справочник',
+    text:              TextIf( 'Справочник'),
     iconCls:            'icon-book',
+	scale:'large',
 			 disabled:defaultMenuDisabled,
 			 hidden:defaultMenuHidden,
              handler: function(){
@@ -58,8 +60,9 @@ var actionarmd = Ext.create('Ext.Action', {
 });
 var actionarsms = Ext.create('Ext.Action', {
     itemId:             'actionarsms',
-    text:               'СМС',
+    text:               TextIf('СМС'),
     iconCls:            'icon-comments',
+	scale:'large',
 			 disabled:defaultMenuDisabled,
 			 hidden:defaultMenuHidden,
              handler: function(){
